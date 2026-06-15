@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO &amp; Blog Pipeline &mdash; Heartbeat KB</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html">MCPs</a></li>
+        <li><a href="skills-uebersicht.html">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <span>Fortgeschritten</span>
+        <span class="sep">/</span>
+        <span class="current">SEO &amp; Blog Pipeline</span>
+      </div>
+      <h1>SEO &amp; Blog Pipeline: Automatisierter <em>Content</em></h1>
+      <div class="article-meta">
+        <span class="tag">Fortgeschritten</span>
+        <span>&#128214; 8 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <div class="video-placeholder">
+      <div class="video-play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <span class="video-label">Video: Von Null zum automatisierten Blog</span>
+    </div>
+
+    <h2>Warum eine automatisierte Blog-Pipeline?</h2>
+    <p>Organischer Traffic ist der wertvollste Traffic &mdash; aber regelmäßig hochwertigen SEO-Content zu produzieren kostet Zeit. Die Idee hinter der SEO &amp; Blog Pipeline: Claude Code übernimmt den gesamten Workflow von der Keyword-Recherche bis zum fertigen, optimierten Blogpost. Du behältst die redaktionelle Kontrolle, während die Maschine die Fleißarbeit erledigt.</p>
+
+    <h2>Die Architektur: Astro + Storyblok</h2>
+    <p>Das technische Fundament der Pipeline besteht aus zwei Bausteinen:</p>
+    <ul>
+      <li><strong>Astro</strong> &mdash; ein modernes Static-Site-Framework, das blitzschnelle Websites generiert. Perfekt für Blogs, weil jede Seite als statisches HTML ausgeliefert wird. Kein JavaScript-Overhead, maximale Core Web Vitals.</li>
+      <li><strong>Storyblok</strong> &mdash; ein Headless CMS, das als Content-Hub dient. Redakteure (oder Claude Code) pflegen Inhalte über die API ein, Astro baut daraus fertige Seiten.</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>Warum Astro statt WordPress?</strong> Astro liefert statisches HTML ohne Datenbank-Abfragen. Das bedeutet: schnellere Ladezeiten, bessere SEO-Scores, weniger Sicherheitsrisiken und nahezu keine Hosting-Kosten. Für content-lastige Seiten mit Blog ist Astro aktuell die beste Wahl.</p>
+    </div>
+
+    <h2>Astro vs. Onepage: Wann was?</h2>
+    <p>Nicht jedes Projekt braucht eine vollständige Astro-Installation. Die Faustregel:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Kriterium</th>
+          <th>Astro + CMS</th>
+          <th>Onepage (z.B. OnePage.io)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blog / Magazin</td>
+          <td>&#10003; Ideal</td>
+          <td>&#10007; Nicht geeignet</td>
+        </tr>
+        <tr>
+          <td>SEO-kritische Seiten</td>
+          <td>&#10003; Volle Kontrolle</td>
+          <td>&#9711; Eingeschränkt</td>
+        </tr>
+        <tr>
+          <td>Einfache Landingpage</td>
+          <td>&#9711; Overkill</td>
+          <td>&#10003; Perfekt</td>
+        </tr>
+        <tr>
+          <td>Mehrere Unterseiten</td>
+          <td>&#10003; Skaliert beliebig</td>
+          <td>&#10007; Nur Single Page</td>
+        </tr>
+        <tr>
+          <td>Setup-Aufwand</td>
+          <td>Mittel (Repo + Deploy)</td>
+          <td>Gering (Drag &amp; Drop)</td>
+        </tr>
+        <tr>
+          <td>Laufende Kosten</td>
+          <td>Minimal (Vercel/Netlify)</td>
+          <td>Monatliches Abo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Kurz gesagt:</strong> Wenn du regelmäßig Inhalte publizieren willst und SEO wichtig ist &mdash; nimm Astro. Für eine schnelle Landingpage ohne Blog reicht Onepage völlig aus.</p>
+
+    <h2>Der Pipeline-Workflow in 5 Schritten</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <h4>1. CMS Setup</h4>
+          <p>Storyblok-Space anlegen, Content-Typen definieren (Blogpost, Autor, Kategorie) und die Astro-Integration konfigurieren. Claude Code kann das initiale Astro-Projekt scaffolden und die Storyblok-Bridge einrichten.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>2. Content-Generierung</h4>
+          <p>Aus einer Keyword-Liste generiert Claude Code vollständige Blogposts: Titel, Meta-Description, Struktur mit H2/H3, Fließtext, interne Verlinkung und Call-to-Actions. Jeder Post wird als Draft in Storyblok angelegt.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>3. SEO-Optimierung</h4>
+          <p>Der SEO-Audit-Skill prüft jeden Post automatisch: Keyword-Dichte, Meta-Tags, Alt-Texte, interne Links, Lesezeit, Schema-Markup. Fehlt etwas, wird es direkt korrigiert.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>4. Review &amp; Freigabe</h4>
+          <p>Du prüfst die generierten Drafts in Storyblok. Passt alles? Ein Klick auf "Publish" macht den Post live. Willst du etwas ändern? Sag Claude Code was nicht stimmt, der Rest läuft automatisch.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>5. Build &amp; Deploy</h4>
+          <p>Nach dem Publish triggert ein Webhook den Astro-Build. Die Seite wird neu generiert und automatisch auf Vercel oder Netlify deployed. Innerhalb von Sekunden ist der neue Post live.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Der SEO-Audit-Skill</h2>
+    <p>Das Herzstück der Pipeline ist ein dedizierter SEO-Audit-Skill, der nach jedem Build automatisch laufen kann. Er prüft:</p>
+    <ul>
+      <li><strong>On-Page SEO:</strong> Title-Tag Länge (50&ndash;60 Zeichen), Meta-Description (150&ndash;160 Zeichen), H1-Eindeutigkeit, Keyword im ersten Absatz</li>
+      <li><strong>Technisches SEO:</strong> Canonical-Tags, robots.txt, Sitemap-Vollständigkeit, Ladegeschwindigkeit, Mobile-Friendliness</li>
+      <li><strong>Content-Qualität:</strong> Wortanzahl (min. 800 Wörter für Blogposts), Lesefluss, Absatzlänge, Bild-Alt-Texte</li>
+      <li><strong>Interne Verlinkung:</strong> Mindestens 2&ndash;3 interne Links pro Post, keine Broken Links, sinnvolle Ankertexte</li>
+    </ul>
+
+    <pre><code># Beispiel: SEO-Audit-Skill Struktur
+.claude/skills/seo-audit/
+├── SKILL.md
+├── references/
+│   ├── seo-checklist.md      # Vollständige Prüfliste
+│   ├── schema-templates.md   # JSON-LD Schema-Vorlagen
+│   └── keyword-rules.md      # Keyword-Dichte, Platzierung
+└── scripts/
+    └── audit.py              # Automatischer Check nach Build</code></pre>
+
+    <div class="info-box">
+      <p><strong>Konzept-Idee:</strong> Der SEO-Audit-Skill kann als Post-Build-Hook konfiguriert werden. Jedes Mal wenn Astro baut, läuft der Audit automatisch und meldet Probleme direkt in Claude Code. So rutscht kein unoptimierter Post durch.</p>
+    </div>
+
+    <h2>Die Vision: Multi-Domain Content</h2>
+    <p>Einmal aufgesetzt, lässt sich die Pipeline auf mehrere Domains skalieren. Stell dir vor:</p>
+    <ul>
+      <li><strong>Domain A:</strong> Firmenblog mit Thought-Leadership-Content</li>
+      <li><strong>Domain B:</strong> Nischen-Affiliate-Seite mit Produktvergleichen</li>
+      <li><strong>Domain C:</strong> Kunden-Blog im Managed-Service</li>
+    </ul>
+    <p>Jede Domain hat ihr eigenes Astro-Repo und ihren eigenen Storyblok-Space, aber alle werden über die gleiche Claude-Code-Pipeline befüllt. Die Content-Generierung folgt domain-spezifischen Regeln (Tonalität, Keywords, Zielgruppe), der technische Workflow bleibt identisch.</p>
+
+    <h2>Wie weit kann Automatisierung gehen?</h2>
+    <p>Vollautomatische Content-Produktion klingt verlockend &mdash; aber es gibt klare Grenzen:</p>
+    <ul>
+      <li><strong>Was gut automatisierbar ist:</strong> Recherche, Struktur, erste Entwürfe, SEO-Checks, technisches Deployment, Meta-Daten, Schema-Markup</li>
+      <li><strong>Was menschliche Kontrolle braucht:</strong> Finale Freigabe, Brand Voice, kontroverse Themen, Fakten-Checks bei sensiblen Inhalten, strategische Themenplanung</li>
+      <li><strong>Was du nicht automatisieren solltest:</strong> Thought-Leadership-Pieces ohne eigene Expertise, Content über Themen die du nicht verstehst, "Me-too"-Content ohne eigenen Winkel</li>
+    </ul>
+    <p>Die Pipeline ist ein Werkzeug, kein Ersatz für redaktionelle Qualität. Sie nimmt dir die Fleißarbeit ab, damit du dich auf Strategie und Qualitätskontrolle konzentrieren kannst.</p>
+
+    <div class="info-box">
+      <p><strong>Praxis-Tipp:</strong> Starte mit 2&ndash;3 Blogposts pro Woche und überprüfe nach einem Monat die Rankings. Erst wenn der Workflow sitzt und die Qualität stimmt, skalierst du auf tägliches Publishing oder mehrere Domains.</p>
+    </div>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="eigene-skills-bauen.html" class="article-card">
+          <span class="article-card-tag">Advanced</span>
+          <h3>Eigene Skills bauen</h3>
+          <p>Lerne wie du eigene Skills für deine Workflows erstellst &mdash; z.B. einen SEO-Audit-Skill.</p>
+          <div class="article-card-meta"><span>&#128214; 10 Min.</span></div>
+        </a>
+        <a href="mcp-integrationen.html" class="article-card">
+          <span class="article-card-tag">Referenz</span>
+          <h3>MCP-Integrationen</h3>
+          <p>Alle MCP-Server im Überblick &mdash; inkl. Google Drive und CMS-Anbindungen.</p>
+          <div class="article-card-meta"><span>&#128214; 12 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Kategorien</h4><ul>
+          <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+          <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+          <li><a href="skills-uebersicht.html">Skills</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+</body>
+</html>

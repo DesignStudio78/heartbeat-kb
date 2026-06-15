@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma MCP &mdash; Heartbeat KB</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html" class="active">MCPs</a></li>
+        <li><a href="skills-uebersicht.html">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <a href="mcp-integrationen.html">MCPs</a>
+        <span class="sep">/</span>
+        <span class="current">Figma MCP</span>
+      </div>
+      <h1>Figma MCP: Designs lesen, erstellen und <em>bearbeiten</em></h1>
+      <div class="article-meta">
+        <span class="tag">Deep Dive</span>
+        <span>&#128214; 12 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <div class="video-placeholder">
+      <div class="video-play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <span class="video-label">Video: Figma MCP Workflow Demo</span>
+    </div>
+
+    <h2>Was kann der Figma MCP?</h2>
+    <p>Der Figma MCP ist die Brücke zwischen Code und Design. Er nutzt die offizielle Figma Plugin API und kann alles tun, was du manuell in Figma machen könntest &mdash; und vieles mehr, weil Claude Code Logik und Automatisierung hinzufügt.</p>
+
+    <h3>Kernfähigkeiten</h3>
+    <ul>
+      <li><strong>Design Context lesen:</strong> Screenshots, Code-Referenz und Metadaten von jedem Node auslesen</li>
+      <li><strong>Nodes erstellen:</strong> Frames, Text, Formen, Auto-Layouts &mdash; alles programmatisch</li>
+      <li><strong>Komponenten bauen:</strong> Component Sets mit Varianten, Properties und Auto-Layout</li>
+      <li><strong>Variablen verwalten:</strong> Collections, Modes (Light/Dark), Token-Hierarchien</li>
+      <li><strong>Text-Styles:</strong> Typography Ramps mit Font-Bindings erstellen</li>
+      <li><strong>Assets verwalten:</strong> Bilder hochladen, Thumbnails exportieren</li>
+    </ul>
+
+    <h2>Typische Workflows</h2>
+
+    <h3>1. Design-to-Code</h3>
+    <p>Du gibst Claude Code eine Figma-URL und er extrahiert die Design-Informationen:</p>
+    <pre><code>"Implementiere dieses Design aus Figma:
+https://figma.com/design/abc123/MeinDesign?node-id=1-2"</code></pre>
+    <p>Claude Code liest den Node aus, analysiert Farben, Fonts, Spacing und generiert den passenden HTML/CSS-Code.</p>
+
+    <h3>2. Code-to-Design (Figma Capture)</h3>
+    <p>Umgekehrt kann Claude Code auch HTML-Seiten zurück nach Figma pushen. Das wird z.B. beim Freebie Generator genutzt:</p>
+    <ol>
+      <li>Freebie wird als HTML generiert (595&times;842px)</li>
+      <li>Chrome Headless rendert die Seite</li>
+      <li>Das Ergebnis wird via Plugin API in Figma eingefügt</li>
+      <li>Gradient-Fills und Variablen werden nachträglich angewendet</li>
+    </ol>
+
+    <h3>3. Design System erstellen</h3>
+    <p>Mit dem <code>/generate-design-system</code> Skill kann Claude Code ein komplettes Design System in Figma aufbauen:</p>
+    <ul>
+      <li><strong>3-Tier Variablen:</strong> Primitives &rarr; Semantic &rarr; Component-Level</li>
+      <li><strong>Light/Dark Modes</strong> mit spezifischen Scopes</li>
+      <li><strong>Typography Ramp:</strong> Display, H1&ndash;H4, Body, Caption, Overline</li>
+      <li><strong>Spacing Scale:</strong> 0, 1, 2, 4, 8, 12, 16, 20, 24, 32, 48, 64</li>
+      <li><strong>Komponenten:</strong> Buttons, Cards, Inputs mit Varianten</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>Wichtig:</strong> Die Figma API kann nur Cloud-Fonts laden. Lokale Fonts wie Helvetica Now Display funktionieren nicht &mdash; verwende stattdessen Google Fonts oder Adobe Fonts die in der Figma Cloud verfügbar sind.</p>
+    </div>
+
+    <h2>Wichtige Konzepte</h2>
+
+    <h3>Inkrementelles Arbeiten</h3>
+    <p>Der Figma MCP arbeitet inkrementell &mdash; komplexe Layouts werden Schritt für Schritt aufgebaut. Jeder Schritt wird validiert bevor der nächste startet. Das verhindert Fehler und macht den Prozess nachvollziehbar.</p>
+
+    <h3>Auto-Layout</h3>
+    <p>Figma's Auto-Layout ist das zentrale Layout-System. Claude Code nutzt es standardmäßig für alle Container mit strukturell verbundenen Kindern. Das bedeutet: Kein manuelles Positionieren mit x/y-Koordinaten, sondern intelligentes Spacing und Sizing.</p>
+
+    <h3>Variablen-Hierarchie</h3>
+    <p>Best Practice ist eine 3-stufige Hierarchie:</p>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>Ebene</th>
+          <th>Beispiel</th>
+          <th>Zweck</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Primitives</td>
+          <td><code>orange-500</code>, <code>gray-100</code></td>
+          <td>Rohe Farbwerte</td>
+        </tr>
+        <tr>
+          <td>Semantic</td>
+          <td><code>bg-primary</code>, <code>text-accent</code></td>
+          <td>Bedeutung/Rolle</td>
+        </tr>
+        <tr>
+          <td>Component</td>
+          <td><code>button-bg</code>, <code>card-border</code></td>
+          <td>Komponentenspezifisch</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Verbindung einrichten</h2>
+    <p>Der Figma MCP wird über das offizielle Figma Plugin verbunden. Die Authentifizierung läuft über OAuth direkt in Claude Web:</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <h4>Figma-Account verbinden</h4>
+          <p>Gehe zu Claude Web (claude.ai) und verbinde deinen Figma-Account über die Integrationen-Seite.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Figma-Datei öffnen</h4>
+          <p>Öffne die Figma-Datei, mit der du arbeiten willst, und kopiere die URL.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>URL an Claude Code geben</h4>
+          <p>Gib die URL in Claude Code ein mit einer Anweisung wie "Lies dieses Design" oder "Erstelle dort ein neues Frame".</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Bekannte Einschränkungen</h2>
+    <ul>
+      <li>Nur Cloud-Fonts werden unterstützt (keine lokalen Fonts)</li>
+      <li>Maximale Script-Komplexität: ~10 logische Operationen pro Aufruf</li>
+      <li>Seiten müssen einzeln geladen werden (kein Multi-Page in einem Aufruf)</li>
+      <li><code>figma.notify()</code> funktioniert nicht im MCP-Kontext</li>
+    </ul>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="mcp-integrationen.html" class="article-card">
+          <span class="article-card-tag">Übersicht</span>
+          <h3>Alle MCP-Integrationen im Überblick</h3>
+          <p>Asana, Google Drive, Close CRM und mehr.</p>
+          <div class="article-card-meta"><span>&#128214; 6 Min.</span></div>
+        </a>
+        <a href="skills-uebersicht.html" class="article-card">
+          <span class="article-card-tag">Workflows</span>
+          <h3>Skills die den Figma MCP nutzen</h3>
+          <p>Freebie Generator, Design Systeme, Styleguides und mehr.</p>
+          <div class="article-card-meta"><span>&#128214; 15 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Kategorien</h4>
+          <ul>
+            <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+            <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+            <li><a href="skills-uebersicht.html">Skills</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+</body>
+</html>

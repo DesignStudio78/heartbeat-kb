@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP-Integrationen &mdash; Heartbeat KB</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html" class="active">MCPs</a></li>
+        <li><a href="skills-uebersicht.html">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <span class="current">MCP-Integrationen</span>
+      </div>
+      <h1>MCP-Server: Was sie können und wie du sie <em>verbindest</em></h1>
+      <div class="article-meta">
+        <span class="tag">Integrationen</span>
+        <span>&#128214; 6 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <h2>Was sind MCP-Server?</h2>
+    <p>MCP steht für <strong>Model Context Protocol</strong>. Es ist ein offener Standard, der es Claude Code ermöglicht, mit externen Tools und Diensten zu kommunizieren. Stell dir MCPs wie Plugins vor: Jeder MCP-Server gibt Claude Code neue Fähigkeiten.</p>
+    <p>Ohne MCPs kann Claude Code nur mit lokalen Dateien und dem Terminal arbeiten. Mit MCPs kann er plötzlich Figma-Designs erstellen, Asana-Tasks verwalten, Google-Docs bearbeiten oder KI-Bilder generieren.</p>
+
+    <div class="info-box">
+      <p><strong>Wie es funktioniert:</strong> Die MCP-Konfiguration liegt in der <code>.mcp.json</code> Datei im Projektverzeichnis. Claude Code verbindet sich beim Start automatisch mit allen konfigurierten Servern.</p>
+    </div>
+
+    <h2>Verfügbare Integrationen</h2>
+
+    <h3>Asana MCP &mdash; Projektmanagement</h3>
+    <p>Der Asana MCP verbindet Claude Code mit deinem Asana-Workspace. Du kannst damit:</p>
+    <ul>
+      <li><strong>Tasks erstellen und verwalten</strong> &mdash; "Erstelle einen Task für das neue Logo-Projekt"</li>
+      <li><strong>Projekte durchsuchen</strong> &mdash; "Welche Tasks sind diese Woche fällig?"</li>
+      <li><strong>Subtasks anlegen</strong> &mdash; Automatisch Unteraufgaben für komplexe Workflows erstellen</li>
+      <li><strong>Status-Updates lesen</strong> &mdash; Projektstatus direkt in der Konversation abrufen</li>
+    </ul>
+
+    <div class="video-placeholder">
+      <div class="video-play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <span class="video-label">Video: Asana MCP in Aktion</span>
+    </div>
+
+    <h3>Figma MCP &mdash; Design-Automatisierung</h3>
+    <p>Der Figma MCP ist einer der mächtigsten Integrationen. Er erlaubt Claude Code, direkt in Figma-Dateien zu arbeiten:</p>
+    <ul>
+      <li><strong>Designs auslesen</strong> &mdash; Screenshots, Metadaten, Komponentenstruktur</li>
+      <li><strong>Nodes erstellen und bearbeiten</strong> &mdash; Frames, Text, Formen, Auto-Layouts</li>
+      <li><strong>Design Systeme aufbauen</strong> &mdash; Variablen, Tokens, Komponenten mit Varianten</li>
+      <li><strong>Design-to-Code</strong> &mdash; Figma-Designs als Code-Referenz exportieren</li>
+      <li><strong>Code-to-Design</strong> &mdash; HTML/Code-Layouts zurück nach Figma pushen</li>
+    </ul>
+    <p>Mehr dazu im <a href="figma-mcp.html">Figma MCP Deep Dive</a>.</p>
+
+    <h3>Google Drive MCP &mdash; Dateiverwaltung</h3>
+    <p>Mit dem Google Drive MCP kann Claude Code auf dein gesamtes Google Drive zugreifen:</p>
+    <ul>
+      <li><strong>Dateien suchen und lesen</strong> &mdash; Dokumente, Sheets, Präsentationen</li>
+      <li><strong>Dateien erstellen und bearbeiten</strong> &mdash; Google Docs und Sheets direkt beschreiben</li>
+      <li><strong>Ordner verwalten</strong> &mdash; Dateien verschieben, Ordner erstellen</li>
+      <li><strong>Bilder hochladen</strong> &mdash; Generierte Creatives direkt in Drive-Ordner speichern</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>Typischer Einsatz:</strong> Beim D4Y-Workflow werden fertige Ad-Bilder automatisch in einen kundenspezifischen Google Drive Ordner hochgeladen, damit der Kunde sofort Zugriff hat.</p>
+    </div>
+
+    <h3>Higgsfield MCP &mdash; KI-Bild- &amp; Videogenerierung</h3>
+    <p>Higgsfield ist die zentrale Plattform für KI-Generierung. Über den MCP kannst du:</p>
+    <ul>
+      <li><strong>Bilder generieren</strong> &mdash; GPT Image 2, Flux, Seedream, Recraft und mehr</li>
+      <li><strong>Videos erstellen</strong> &mdash; Text-to-Video, Image-to-Video, Animationen</li>
+      <li><strong>Soul Characters nutzen</strong> &mdash; Konsistente Gesichter/Identitäten über mehrere Bilder</li>
+      <li><strong>Bilder bearbeiten</strong> &mdash; Upscaling, Hintergrund entfernen, Outpainting</li>
+    </ul>
+    <p>Mehr dazu im <a href="higgsfield.html">Higgsfield Deep Dive</a>.</p>
+
+    <h3>Close CRM MCP &mdash; Sales &amp; Lead-Management</h3>
+    <p>Der Close CRM MCP verbindet Claude Code mit deinem Vertriebssystem:</p>
+    <ul>
+      <li><strong>Lead-Daten abrufen</strong> &mdash; Kontaktinfos, Unternehmensdaten, Notizen</li>
+      <li><strong>Opportunities verwalten</strong> &mdash; Deal-Status aktualisieren</li>
+      <li><strong>Tasks erstellen</strong> &mdash; Follow-up-Aufgaben direkt aus der Konversation</li>
+      <li><strong>Suche</strong> &mdash; Leads nach Name, Status oder Custom Fields filtern</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>Typischer Einsatz:</strong> Beim D4Y-Workflow zieht Claude Code automatisch die Lead-Daten aus Close (Firmenname, Logo, Angebot), um daraus personalisierte Ad-Creatives zu erstellen.</p>
+    </div>
+
+    <h2>Einen MCP verbinden</h2>
+    <p>MCPs werden in der <code>.mcp.json</code> Datei konfiguriert. Die meisten MCPs nutzen entweder OAuth (z.B. Figma, Higgsfield über Claude Web) oder API-Keys (z.B. Close CRM, Google Drive).</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <h4>MCP-Server identifizieren</h4>
+          <p>Entscheide welchen Dienst du verbinden willst und prüfe ob ein MCP-Server dafür existiert.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Authentifizierung einrichten</h4>
+          <p>Je nach MCP: API-Key als Umgebungsvariable setzen, OAuth über Claude Web verbinden, oder Credential-Datei erstellen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>In .mcp.json eintragen</h4>
+          <p>Den Server mit seinen Verbindungsdaten in die <code>.mcp.json</code> Datei eintragen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Claude Code neu starten</h4>
+          <p>Claude Code neu starten &mdash; die neuen Tools erscheinen automatisch.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>MCP-Server im Vergleich</h2>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>MCP</th>
+          <th>Auth-Methode</th>
+          <th>Hauptnutzen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Asana</strong></td>
+          <td>Access Token</td>
+          <td>Projektmanagement, Task-Tracking</td>
+        </tr>
+        <tr>
+          <td><strong>Figma</strong></td>
+          <td>OAuth (Plugin)</td>
+          <td>Design lesen/schreiben, Komponenten</td>
+        </tr>
+        <tr>
+          <td><strong>Google Drive</strong></td>
+          <td>OAuth Credentials</td>
+          <td>Dateien, Docs, Sheets, Upload</td>
+        </tr>
+        <tr>
+          <td><strong>Higgsfield</strong></td>
+          <td>OAuth (Claude Web)</td>
+          <td>Bild/Video-Generierung, Editing</td>
+        </tr>
+        <tr>
+          <td><strong>Close CRM</strong></td>
+          <td>API Key</td>
+          <td>Lead-Daten, Sales Pipeline</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="figma-mcp.html" class="article-card">
+          <span class="article-card-tag">Deep Dive</span>
+          <h3>Figma MCP: Designs lesen, erstellen und bearbeiten</h3>
+          <p>Alles was du über die Figma-Integration wissen musst.</p>
+          <div class="article-card-meta"><span>&#128214; 12 Min.</span></div>
+        </a>
+        <a href="higgsfield.html" class="article-card">
+          <span class="article-card-tag">Deep Dive</span>
+          <h3>Higgsfield: KI-Bilder &amp; Videos</h3>
+          <p>Alle Modelle, Formate und Workflows für KI-Generierung.</p>
+          <div class="article-card-meta"><span>&#128214; 10 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Kategorien</h4>
+          <ul>
+            <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+            <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+            <li><a href="skills-uebersicht.html">Skills</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+</body>
+</html>

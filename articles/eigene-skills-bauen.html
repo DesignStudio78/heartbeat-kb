@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eigene Skills bauen &mdash; Heartbeat KB</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html">MCPs</a></li>
+        <li><a href="skills-uebersicht.html" class="active">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <a href="skills-uebersicht.html">Skills</a>
+        <span class="sep">/</span>
+        <span class="current">Eigene Skills bauen</span>
+      </div>
+      <h1>Eigene Skills bauen: Workflows <em>automatisieren</em></h1>
+      <div class="article-meta">
+        <span class="tag">Advanced</span>
+        <span>&#128214; 10 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <div class="video-placeholder">
+      <div class="video-play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <span class="video-label">Video: Deinen ersten Skill erstellen</span>
+    </div>
+
+    <h2>Was ist ein Skill?</h2>
+    <p>Ein Skill ist ein wiederverwendbarer Workflow, den Claude Code mit einem Slash-Befehl aktiviert. Statt jedes Mal den gleichen Prompt zu schreiben, definierst du den Ablauf einmal als Skill &mdash; und kannst ihn danach jederzeit mit <code>/mein-skill</code> aufrufen.</p>
+
+    <h2>Anatomie eines Skills</h2>
+    <p>Jeder Skill ist ein Ordner unter <code>.claude/skills/</code> mit mindestens einer <code>SKILL.md</code> Datei:</p>
+
+    <pre><code>.claude/skills/mein-skill/
+├── SKILL.md              # Pflicht: Skill-Definition
+├── references/           # Optional: Referenz-Dokumente
+│   ├── sop.md           # z.B. Standard Operating Procedure
+│   └── templates.md     # z.B. Prompt-Templates
+└── scripts/             # Optional: Python/Bash Scripts
+    └── helper.py</code></pre>
+
+    <h2>Die SKILL.md Datei</h2>
+    <p>Die <code>SKILL.md</code> ist das Herzstück. Sie sagt Claude Code <strong>wann</strong> der Skill aktiviert wird, <strong>was</strong> er tun soll und <strong>wie</strong> er arbeiten soll.</p>
+
+    <pre><code># Mein Skill Name
+
+## Trigger
+Dieser Skill wird aktiviert wenn der User "/mein-skill"
+sagt oder "mach mir ein XYZ".
+
+## Workflow
+1. Frage den User nach [Input A] und [Input B]
+2. Lese die Referenz-Datei references/sop.md
+3. Erstelle [Output] basierend auf den Inputs
+4. Speichere das Ergebnis in output/
+
+## Regeln
+- Immer deutschen Text verwenden
+- Kosten vorab zeigen bei API-Aufrufen
+- Output-Ordner nach Fertigstellung öffnen</code></pre>
+
+    <h3>Best Practices für SKILL.md</h3>
+    <ul>
+      <li><strong>Klare Trigger definieren:</strong> Liste alle Phrasen auf, die den Skill aktivieren sollen</li>
+      <li><strong>Workflow nummeriert:</strong> Schritte klar durchnummerieren, damit Claude Code den Ablauf versteht</li>
+      <li><strong>Regeln explizit:</strong> Alles was IMMER gelten soll als Regel formulieren</li>
+      <li><strong>Referenzen nutzen:</strong> Komplexe Informationen in <code>references/</code> auslagern, nicht alles in die SKILL.md packen</li>
+      <li><strong>Outputs definieren:</strong> Klar sagen wo und in welchem Format das Ergebnis landen soll</li>
+    </ul>
+
+    <h2>Referenz-Dateien</h2>
+    <p>Der <code>references/</code> Ordner enthält alles was Claude Code als Kontext braucht:</p>
+    <ul>
+      <li><strong>SOPs:</strong> Standard Operating Procedures &mdash; der "goldene Pfad" für den Workflow</li>
+      <li><strong>Templates:</strong> Prompt-Templates, Text-Vorlagen, Formatierungsregeln</li>
+      <li><strong>Beispiele:</strong> Gute Beispiel-Outputs als Referenz</li>
+      <li><strong>Design-Regeln:</strong> CI-Farben, Fonts, Layout-Vorgaben</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>Tipp:</strong> Claude Code liest Referenz-Dateien automatisch wenn sie in der SKILL.md referenziert werden. Du musst sie nicht manuell laden. Nutze Formulierungen wie "Lese references/sop.md für die genauen Regeln".</p>
+    </div>
+
+    <h2>Beispiel: Cold Mailing Skill</h2>
+    <p>Ein konkretes Beispiel &mdash; ein Skill für automatisierte Cold-Mailing-Sequenzen:</p>
+
+    <pre><code># Cold Mailing Skill
+
+## Trigger
+/cold-mailing, "E-Mail Sequenz erstellen",
+"Cold Outreach", "Mailing Kampagne"
+
+## Workflow
+1. Zielgruppe + Angebot vom User erfragen
+2. references/email-frameworks.md lesen
+3. 5-E-Mail-Sequenz generieren:
+   - E-Mail 1: Cold Opener (Pain Point)
+   - E-Mail 2: Value Add (Case Study)
+   - E-Mail 3: Social Proof
+   - E-Mail 4: Objection Handler
+   - E-Mail 5: Break-Up Email
+4. Betreffzeilen-Varianten (je 3 pro E-Mail)
+5. Als Markdown-Datei speichern
+
+## Regeln
+- Deutsche Sprache, Sie-Form
+- Keine Spam-Trigger-Wörter
+- Jede E-Mail max. 150 Wörter
+- Betreffzeilen max. 50 Zeichen</code></pre>
+
+    <h2>Skill testen und iterieren</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <h4>Erstversion schreiben</h4>
+          <p>Erstelle die SKILL.md mit dem grundlegenden Workflow. Halte es einfach &mdash; du kannst später erweitern.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Testen</h4>
+          <p>Starte Claude Code neu und rufe <code>/dein-skill</code> auf. Prüfe ob der Workflow wie erwartet läuft.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Feedback einarbeiten</h4>
+          <p>Wenn etwas nicht passt: "Merk dir, dass bei /mein-skill immer X gemacht werden soll" &mdash; Claude Code speichert das als Feedback-Memory.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>SKILL.md anpassen</h4>
+          <p>Regeln und Learnings aus dem Testen in die SKILL.md übernehmen, damit sie beim nächsten Mal direkt stimmen.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Häufige Fehler</h2>
+    <ul>
+      <li><strong>Zu vage:</strong> "Erstelle guten Content" &rarr; Besser: "Erstelle 5 LinkedIn-Posts mit Hook-Opener, max. 300 Zeichen"</li>
+      <li><strong>Keine Referenzen:</strong> Alles in die SKILL.md packen macht sie unübersichtlich. Nutze <code>references/</code>.</li>
+      <li><strong>Fehlende Regeln:</strong> Wenn der Output immer leicht anders ist, fehlen klare Constraints.</li>
+      <li><strong>Kein Output-Pfad:</strong> Ohne definierten Speicherort landen Dateien irgendwo.</li>
+    </ul>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="skills-uebersicht.html" class="article-card">
+          <span class="article-card-tag">Referenz</span>
+          <h3>Alle 21 Skills im Überblick</h3>
+          <p>Inspiration: Schau dir bestehende Skills als Vorlage an.</p>
+          <div class="article-card-meta"><span>&#128214; 15 Min.</span></div>
+        </a>
+        <a href="claude-code-einrichten.html" class="article-card">
+          <span class="article-card-tag">Basics</span>
+          <h3>Claude Code einrichten</h3>
+          <p>Noch nicht eingerichtet? Hier geht's los.</p>
+          <div class="article-card-meta"><span>&#128214; 8 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Kategorien</h4><ul>
+          <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+          <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+          <li><a href="skills-uebersicht.html">Skills</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+</body>
+</html>

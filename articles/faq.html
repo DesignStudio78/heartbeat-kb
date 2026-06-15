@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ &mdash; Heartbeat KB</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html">MCPs</a></li>
+        <li><a href="skills-uebersicht.html">Skills</a></li>
+        <li><a href="faq.html" class="active">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <span class="current">FAQ</span>
+      </div>
+      <h1>Häufig gestellte <em>Fragen</em></h1>
+      <div class="article-meta">
+        <span class="tag">Hilfe</span>
+        <span>&#128214; 5 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <h2>Allgemein</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Was ist Claude Code und wofür nutzen wir es?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Claude Code ist ein KI-Assistent von Anthropic, der im Terminal läuft. Bei Heartbeat nutzen wir ihn als zentrale Content Engine: Er erstellt Ad-Copies, generiert KI-Bilder, baut Figma-Designs, verwaltet Kundendaten und automatisiert wiederkehrende Marketing-Workflows. Alles gesteuert über natürliche Sprache und Slash-Befehle.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Brauche ich Programmierkenntnisse?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Nein. Claude Code versteht natürliche Sprache. Du sagst einfach was du brauchst, z.B. "Erstelle 5 Ads für Casinoverluste" oder tippst <code>/d4y</code>. Claude Code kümmert sich um die technische Umsetzung. Die Skills sind so gebaut, dass du nur die kreativen Entscheidungen triffst.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Wo läuft Claude Code &mdash; lokal oder in der Cloud?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Claude Code läuft lokal auf deinem Rechner und kommuniziert mit der Anthropic API in der Cloud. Deine Dateien bleiben bei dir &mdash; nur die Konversation und Tool-Aufrufe gehen über die API. MCP-Server wie Figma oder Google Drive verbinden sich direkt mit den jeweiligen Cloud-Diensten.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Was ist die CLAUDE.md Datei?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Die <code>CLAUDE.md</code> ist die zentrale Konfigurationsdatei im Projekt. Sie definiert die Rolle von Claude Code ("Heartbeat Content Engine"), verfügbare Tools, Regeln (z.B. "Kosten vorab zeigen") und die Projektarchitektur. Claude Code liest sie automatisch beim Start und richtet sich danach.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>MCP-Integrationen</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Was ist ein MCP-Server?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>MCP steht für Model Context Protocol. Es ist ein Standard der es Claude Code ermöglicht, mit externen Diensten zu kommunizieren. Jeder MCP-Server ist wie ein Plugin: Der Asana-MCP gibt Claude Code Zugriff auf Projektmanagement, der Figma-MCP auf Design-Tools, usw. Die Konfiguration liegt in der <code>.mcp.json</code> Datei.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Wie verbinde ich einen neuen MCP-Server?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Es gibt zwei Wege: (1) <strong>OAuth über Claude Web:</strong> Für Dienste wie Figma und Higgsfield gehst du auf claude.ai, öffnest die Integrationen und verbindest den Dienst. (2) <strong>API Key:</strong> Für Dienste wie Close CRM setzt du den API-Key als Umgebungsvariable und trägst den Server in <code>.mcp.json</code> ein. Nach einem Neustart von Claude Code sind die neuen Tools verfügbar.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Welche MCPs brauche ich mindestens?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Das hängt davon ab was du machen willst. Für <strong>Ad-Erstellung</strong> brauchst du Higgsfield (Bildgenerierung). Für <strong>Design-Arbeit</strong> den Figma MCP. Für <strong>D4Y-Bundles</strong> Close CRM (Lead-Daten) + Google Drive (Upload). Für <strong>Projektmanagement</strong> Asana. Du kannst auch ohne MCPs starten &mdash; viele Skills funktionieren rein lokal.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Was bringt der Asana MCP konkret?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Der Asana MCP verbindet Claude Code mit deinem Projektmanagement. Du kannst Tasks erstellen, Projekte durchsuchen, Subtasks anlegen und Status-Updates abrufen &mdash; alles direkt aus der Konversation. Besonders nützlich für automatisierte Workflows: "Erstelle einen Task für jede Ad-Variante die generiert wurde."</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>Skills &amp; Workflows</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Was ist der Unterschied zwischen /d4y und /d4y-higgsfield?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Beide erstellen ein LinkedIn Starter Bundle (Playbook + 2 Bild-ADs + 3 Bilder). Der Unterschied liegt in der Bildgenerierung: <code>/d4y</code> nutzt <strong>OpenRouter</strong> (Nano Banana Pro / Gemini Pro, ~$0.14 pro Bild), während <code>/d4y-higgsfield</code> die <strong>Higgsfield Plattform</strong> nutzt (GPT Image 2, ~4 Credits). Higgsfield bietet oft bessere Qualität und 1K-Auflösung als Standard.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Kann ich eigene Skills erstellen?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Ja. Erstelle einen neuen Ordner unter <code>.claude/skills/dein-skill/</code> mit einer <code>SKILL.md</code> Datei. Darin definierst du Trigger-Wörter, den Workflow und optionale Referenz-Dateien. Claude Code erkennt den Skill automatisch und listet ihn unter <code>/skills</code> auf. Orientiere dich an bestehenden Skills als Vorlage.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Warum zeigt Claude Code mir immer Kosten an bevor er generiert?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Das ist eine feste Regel in der Content Engine: <strong>Vor jedem API-Aufruf zur Generierung</strong> muss ein Kostenvoranschlag gezeigt und deine explizite Bestätigung eingeholt werden. Das schützt vor versehentlichen Kosten, besonders wenn viele Bilder auf einmal generiert werden. Du musst mit "ja", "ok" oder "mach das" bestätigen.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Was passiert wenn eine Generierung fehlschlägt?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Claude Code zeigt dir den Fehler und versucht ihn zu analysieren. Häufige Ursachen: API-Limits erreicht, ungültiger Prompt (z.B. zu lang), Netzwerkprobleme oder Modell nicht verfügbar. Claude Code schlägt dann Alternativen vor, z.B. ein anderes Modell oder einen angepassten Prompt. Credits werden nur berechnet wenn die Generierung erfolgreich war.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>Bildgenerierung</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Welches Modell soll ich für welchen Zweck nehmen?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p><strong>GPT Image 2</strong> (via Higgsfield): Beste Qualität für alles mit Text-Rendering und Referenzbilder. <strong>Nano Banana Pro</strong> (Gemini Pro): Günstigste Option für Referenz-basierte Remixes. <strong>Seedream 4.5</strong>: Bestes Preis-Leistung ohne Referenzen, gut für Portraits. <strong>Flux Pro</strong>: Höchste Bildqualität für Fotorealismus. <strong>Recraft V3</strong>: Stark für stilisiertes Design und Illustration. <strong>Ideogram V2</strong>: Am besten für Text-in-Bild und Logos.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Warum werden Umlaute manchmal falsch dargestellt?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>KI-Bildmodelle haben manchmal Probleme mit deutschen Sonderzeichen. Claude Code nutzt deshalb immer echte Umlaute (ü, ä, ö) in Prompts und prüft das Ergebnis nach der Generierung. Wenn Umlaute fehlen oder falsch sind, wird automatisch nachgebessert. Die Regel "NIEMALS ae, oe, ue" ist fest in allen Skills verankert.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Wo landen die generierten Bilder?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Das hängt vom Skill ab. Bei <strong>D4Y</strong> landen Bilder in <code>D4Y Creatives/{datum}/{firma}_d4y_{timestamp}/</code> und werden in Google Drive hochgeladen. Bei <strong>Casinoverluste/Jufina</strong> in einem datums- und KW-basierten Ordner. Bei <strong>Creative Engine</strong> werden sie in Airtable als Attachment gespeichert. Der Output-Ordner öffnet sich nach der Generierung automatisch im Finder.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>Figma &amp; Design</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Kann Claude Code direkt in meine Figma-Datei schreiben?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Ja. Über den Figma MCP kann Claude Code Nodes erstellen, Text bearbeiten, Auto-Layouts aufbauen, Variablen setzen und Komponenten mit Varianten erstellen. Er arbeitet inkrementell &mdash; komplexe Designs werden Schritt für Schritt aufgebaut, mit Validierung nach jedem Schritt.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Warum funktioniert meine lokale Schriftart nicht in Figma?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Die Figma API kann nur <strong>Cloud-Fonts</strong> laden (Google Fonts, Adobe Fonts die in der Figma Cloud verfügbar sind). Lokale Fonts wie Helvetica Now Display funktionieren nicht über die API. Workaround: Verwende eine Cloud-verfügbare Alternative oder setze die Schriftart manuell in Figma nach der automatischen Erstellung.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>Troubleshooting</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Claude Code reagiert nicht oder hängt &mdash; was tun?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Drücke <strong>Ctrl+C</strong> um die aktuelle Operation abzubrechen. Wenn das nicht hilft, beende Claude Code mit <code>/exit</code> oder schließe das Terminal. Starte dann neu mit <code>claude</code>. Dein Memory und deine Konfiguration bleiben erhalten. Wenn das Problem bestehen bleibt, prüfe deine Internetverbindung und ob die Anthropic API erreichbar ist.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Ein MCP-Server verbindet sich nicht &mdash; was kann ich tun?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Prüfe: (1) Ist die <code>.mcp.json</code> korrekt formatiert? (2) Sind die API-Keys/Tokens noch gültig? (3) Ist der MCP-Server-Prozess gestartet? Für OAuth-basierte MCPs (Figma, Higgsfield): Gehe zu Claude Web und erneuere die Verbindung. Für API-Key-basierte MCPs: Prüfe ob die Umgebungsvariable gesetzt ist mit <code>echo $VARIABLE_NAME</code>.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Meine Airtable-Verbindung funktioniert nicht
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Es gibt zwei Verbindungswege: (1) <strong>Primär:</strong> MCP über Claude Web (OAuth). Prüfe ob die Airtable-Integration in Claude Web verbunden ist. (2) <strong>Fallback:</strong> Python REST Client mit PAT in <code>.claude/airtable.json</code>. Prüfe ob der PAT noch gültig ist und die Base-ID (<code>appBcypBUDeVuJkzV</code>) korrekt ist.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Noch Fragen?</h2>
+      <div class="articles-grid">
+        <a href="claude-code-einrichten.html" class="article-card">
+          <span class="article-card-tag">Basics</span>
+          <h3>Claude Code einrichten</h3>
+          <p>Schritt-für-Schritt von der Installation zum ersten Befehl.</p>
+          <div class="article-card-meta"><span>&#128214; 8 Min.</span></div>
+        </a>
+        <a href="mcp-integrationen.html" class="article-card">
+          <span class="article-card-tag">Integrationen</span>
+          <h3>MCP-Server verbinden</h3>
+          <p>Alle 5 Integrationen erklärt.</p>
+          <div class="article-card-meta"><span>&#128214; 6 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Kategorien</h4>
+          <ul>
+            <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+            <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+            <li><a href="skills-uebersicht.html">Skills</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const wasOpen = item.classList.contains('open');
+        const list = item.closest('.faq-list');
+        list.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

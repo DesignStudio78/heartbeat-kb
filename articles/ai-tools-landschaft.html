@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tool-Landschaft &mdash; Heartbeat KB</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html">MCPs</a></li>
+        <li><a href="skills-uebersicht.html" class="active">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <span class="current">AI Tool-Landschaft</span>
+      </div>
+      <h1>AI Tool-Landschaft: Alles was wir <em>nutzen</em></h1>
+      <div class="article-meta">
+        <span class="tag">Übersicht</span>
+        <span>&#128214; 7 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <h2>Kerntools</h2>
+    <table class="content-table">
+      <thead>
+        <tr><th>Tool</th><th>Einsatz</th><th>Kategorie</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Claude Code</strong></td><td>Zentraler AI-Orchestrator, läuft im Terminal</td><td>AI Agent</td></tr>
+        <tr><td><strong>Higgsfield</strong></td><td>KI-Bild- &amp; Videogenerierung, Marketing Studio</td><td>Generierung</td></tr>
+        <tr><td><strong>Figma</strong></td><td>Design-Tool mit MCP-Anbindung</td><td>Design</td></tr>
+        <tr><td><strong>Onepage</strong></td><td>Website-Builder mit MCP</td><td>Websites</td></tr>
+        <tr><td><strong>Airtable</strong></td><td>Content Pipeline &amp; Asset-Tracking</td><td>Datenbank</td></tr>
+      </tbody>
+    </table>
+
+    <h2>MCP-Server</h2>
+    <p>MCP-Server erweitern Claude Code um externe Fähigkeiten:</p>
+    <table class="content-table">
+      <thead>
+        <tr><th>MCP</th><th>Funktion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Figma MCP</strong></td><td>Designs lesen/schreiben, Components, Variables</td></tr>
+        <tr><td><strong>Higgsfield MCP</strong></td><td>Bilder, Videos, Audio generieren</td></tr>
+        <tr><td><strong>Google Drive MCP</strong></td><td>Docs, Sheets, Dateien verwalten</td></tr>
+        <tr><td><strong>Asana MCP</strong></td><td>Tasks, Projekte, Deadlines</td></tr>
+        <tr><td><strong>Close CRM MCP</strong></td><td>Leads, Contacts, Sales Pipeline</td></tr>
+        <tr><td><strong>Onepage MCP</strong></td><td>Websites erstellen und bearbeiten</td></tr>
+        <tr><td><strong>Fireflies MCP</strong></td><td>Meeting-Transkripte durchsuchen</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Video Editing</h2>
+    <h3>Higgsfield Plugins</h3>
+    <p>Higgsfield bietet native Plugins für professionelle Video-Editoren:</p>
+    <ul>
+      <li><strong>Adobe Premiere Pro &amp; After Effects:</strong> 5 AI-Plugins direkt in der Timeline &mdash; Reframe, Remove BG, Upscale, Draw to Edit, Edit Video. Kein Exportieren und Reimportieren nötig.</li>
+      <li><strong>DaVinci Resolve:</strong> Gleiche AI-Funktionen direkt in DaVinci &mdash; Videogenerierung, Bildbearbeitung, Hintergrund entfernen, Upscaling.</li>
+    </ul>
+
+    <h3>OpenCut</h3>
+    <p><strong>OpenCut</strong> ist eine Open-Source Alternative zu CapCut (55k+ GitHub Stars). Besonders interessant für AI-Workflows:</p>
+    <ul>
+      <li><strong>Editor API:</strong> Programmatischer Zugriff auf den kompletten Editor</li>
+      <li><strong>MCP Server:</strong> AI-Agents können direkt Videos bearbeiten</li>
+      <li><strong>Headless Mode:</strong> Batch-Rendering ohne UI</li>
+      <li><strong>Plugin-Architektur:</strong> Eigene Erweiterungen möglich</li>
+    </ul>
+
+    <div class="info-box">
+      <p><strong>Status:</strong> OpenCut wird gerade komplett neu geschrieben. Das Projekt ist vielversprechend für automatisierte Video-Pipelines, aber noch in aktiver Entwicklung.</p>
+    </div>
+
+    <h2>Nützliche Helfer</h2>
+    <table class="content-table">
+      <thead>
+        <tr><th>Tool</th><th>Funktion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Website zu PDF</strong></td><td>Referenz-Websites als PDF speichern für Prompts</td></tr>
+        <tr><td><strong>Fireflies</strong></td><td>Meeting-Aufzeichnungen und Transkripte</td></tr>
+        <tr><td><strong>Pillow (Python)</strong></td><td>Lokale Bildbearbeitung, Text-Overlays</td></tr>
+        <tr><td><strong>Chrome Headless</strong></td><td>HTML zu PDF/Screenshot rendern</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wie evaluiere ich neue AI-Tools?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <h4>Problem definieren</h4>
+          <p>Was genau soll das Tool lösen? Kein Tool um des Tools willen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>MCP-Kompatibilität prüfen</h4>
+          <p>Hat das Tool einen MCP-Server oder eine API? Ohne programmatischen Zugang ist die Integration mit Claude Code schwierig.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Kosten-Nutzen abwägen</h4>
+          <p>Was kostet das Tool vs. wie viel Zeit/Geld spart es? Einmal-Setup-Aufwand bedenken.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <h4>Pilotprojekt</h4>
+          <p>Kleines Testprojekt bevor das Tool in den Produktiv-Workflow kommt.</p>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="mcp-integrationen.html" class="article-card">
+          <span class="article-card-tag">Integrationen</span>
+          <h3>Alle MCP-Integrationen</h3>
+          <p>Detaillierte Anleitungen für jeden MCP-Server.</p>
+          <div class="article-card-meta"><span>&#128214; 6 Min.</span></div>
+        </a>
+        <a href="multi-agent-workflows.html" class="article-card">
+          <span class="article-card-tag">Advanced</span>
+          <h3>Multi-Agent Workflows</h3>
+          <p>AI-Teams orchestrieren für maximale Produktivität.</p>
+          <div class="article-card-meta"><span>&#128214; 8 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Kategorien</h4><ul>
+          <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+          <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+          <li><a href="skills-uebersicht.html">Skills</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+</body>
+</html>

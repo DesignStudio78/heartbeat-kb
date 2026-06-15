@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartbeat Knowledge Base</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ========== STATS BAR ========== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 32px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+    .stats-bar .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .stats-bar .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1;
+      font-family: 'Poppins', sans-serif;
+    }
+    .stats-bar .stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    /* ========== LEARNING PATH ========== */
+    .learning-path {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+      gap: 0;
+      padding-top: 16px;
+    }
+    .learning-path::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(100% / 12);
+      right: calc(100% / 12);
+      height: 2px;
+      background: var(--border-dark);
+    }
+    .path-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .path-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(251, 132, 28, 0.3);
+    }
+    .path-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      margin-bottom: 4px;
+    }
+    .path-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.4;
+      max-width: 140px;
+    }
+
+    /* ========== COMMANDS GRID ========== */
+    .commands-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .command-card {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s;
+    }
+    .command-card:hover {
+      background: var(--accent-soft);
+    }
+    .command-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .command-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ========== TEAM GRID ========== */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .team-card {
+      background: var(--bg-card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .team-card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+    .team-card-role {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.3px;
+    }
+    .team-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .team-card li {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.4;
+      padding-left: 14px;
+      position: relative;
+    }
+    .team-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ========== CATEGORY ICON SVG ========== */
+    .category-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    /* ========== RESPONSIVE NEW COMPONENTS ========== */
+    @media (max-width: 768px) {
+      .stats-bar {
+        flex-wrap: wrap;
+        gap: 24px 32px;
+        padding-top: 24px;
+      }
+      .stats-bar .stat-number {
+        font-size: 22px;
+      }
+
+      .learning-path {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding-left: 20px;
+      }
+      .learning-path::before {
+        top: 0;
+        bottom: 0;
+        left: 39px;
+        right: auto;
+        width: 2px;
+        height: auto;
+      }
+      .path-step {
+        flex-direction: row;
+        text-align: left;
+        gap: 16px;
+      }
+      .path-step .path-number {
+        margin-bottom: 0;
+      }
+      .path-desc {
+        max-width: none;
+      }
+
+      .commands-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="articles/claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="articles/mcp-integrationen.html">MCPs</a></li>
+        <li><a href="articles/skills-uebersicht.html">Skills</a></li>
+        <li><a href="articles/faq.html">FAQ</a></li>
+      </ul>
+      <a href="articles/claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-pill">Knowledge Base</span>
+    <h1>Alles rund um <em>Claude Code</em> &amp; deine Workflows</h1>
+    <p class="hero-sub">Anleitungen, MCP-Integrationen, Skills und Best Practices. Alles was du brauchst, um das Maximum aus Claude Code herauszuholen.</p>
+    <div class="search-wrapper">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Suche nach Artikeln, Skills, MCPs...">
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-number">21</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">7</span>
+        <span class="stat-label">MCPs</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">KI-Modelle</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Artikel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-pill">Kategorien</div>
+        <h2 class="section-title">Finde was du <em>brauchst</em></h2>
+      </div>
+      <div class="categories-grid" id="categoriesGrid">
+
+        <a href="articles/claude-code-einrichten.html" class="category-card" data-search="claude code einrichten setup installation terminal erste schritte">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Erste Schritte</h3>
+          <p>Claude Code installieren, Terminal einrichten und die ersten Befehle lernen.</p>
+          <span class="category-count">Einsteiger-Guide</span>
+        </a>
+
+        <a href="articles/mcp-integrationen.html" class="category-card" data-search="mcp integrationen asana figma google drive higgsfield close crm verbinden">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-3a2 2 0 0 1-2-2V2"/><path d="M9 18a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l4 4v9a2 2 0 0 1-2 2Z"/><path d="M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8"/><path d="M14 13h-4"/><path d="M12 11v4"/></svg>
+          </div>
+          <h3>MCP-Integrationen</h3>
+          <p>Asana, Figma, Google Drive, Higgsfield und Close CRM verbinden und nutzen.</p>
+          <span class="category-count">7 Integrationen</span>
+        </a>
+
+        <a href="articles/skills-uebersicht.html" class="category-card" data-search="skills workflows ad session d4y freebie logo creative engine linkedin recruiting">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Skills &amp; Workflows</h3>
+          <p>Alle 21 verfügbaren Skills im Überblick &mdash; von Ad-Erstellung bis Design-Systeme.</p>
+          <span class="category-count">21 Skills</span>
+        </a>
+
+        <a href="articles/figma-mcp.html" class="category-card" data-search="figma design mcp plugin api komponenten design system variablen">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <h3>Figma MCP</h3>
+          <p>Design-Workflows automatisieren, Komponenten erstellen und Design Systeme aufbauen.</p>
+          <span class="category-count">Deep Dive</span>
+        </a>
+
+        <a href="articles/higgsfield.html" class="category-card" data-search="higgsfield bild video generierung gpt image ki ai soul character modelle">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+          </div>
+          <h3>Higgsfield &amp; KI-Bilder</h3>
+          <p>Bilder und Videos mit KI generieren. GPT Image 2, Seedance, Flux und mehr.</p>
+          <span class="category-count">Generierung</span>
+        </a>
+
+        <a href="articles/faq.html" class="category-card" data-search="faq fragen antworten hilfe support kosten api probleme">
+          <div class="category-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          </div>
+          <h3>FAQ</h3>
+          <p>Häufig gestellte Fragen und Antworten rund um Claude Code und die Content Engine.</p>
+          <span class="category-count">Schnelle Hilfe</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LERNPFAD -->
+  <section class="section section-dark">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-pill">Schritt für Schritt</div>
+        <h2 class="section-title">Dein <em>Lernpfad</em></h2>
+      </div>
+      <div class="learning-path">
+        <div class="path-step">
+          <div class="path-number">1</div>
+          <div>
+            <div class="path-title">Setup</div>
+            <div class="path-desc">Claude Code installieren &amp; konfigurieren</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-number">2</div>
+          <div>
+            <div class="path-title">MCPs verbinden</div>
+            <div class="path-desc">Figma, Higgsfield, Google Drive</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-number">3</div>
+          <div>
+            <div class="path-title">Skills nutzen</div>
+            <div class="path-desc">Erste Workflows mit /d4y oder /ad-session</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-number">4</div>
+          <div>
+            <div class="path-title">Bilder generieren</div>
+            <div class="path-desc">KI-Modelle für Ad-Creatives einsetzen</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-number">5</div>
+          <div>
+            <div class="path-title">Eigene Skills</div>
+            <div class="path-desc">Custom Workflows automatisieren</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-number">6</div>
+          <div>
+            <div class="path-title">Multi-Agent</div>
+            <div class="path-desc">AI-Teams für maximale Produktivität</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK COMMANDS -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-pill">Cheatsheet</div>
+        <h2 class="section-title">Quick <em>Commands</em></h2>
+      </div>
+      <div class="commands-grid" id="commandsGrid">
+        <div class="command-card" data-search="ad-session ad copy meta linkedin werbetexte">
+          <span class="command-name">/ad-session</span>
+          <span class="command-desc">Komplette AD Copy für Meta &amp; LinkedIn</span>
+        </div>
+        <div class="command-card" data-search="d4y design for you linkedin starter bundle playbook">
+          <span class="command-name">/d4y</span>
+          <span class="command-desc">LinkedIn Starter Bundle generieren</span>
+        </div>
+        <div class="command-card" data-search="logo design branding marke angles templates">
+          <span class="command-name">/logo</span>
+          <span class="command-desc">Logo-Design mit 8 Angle-Templates</span>
+        </div>
+        <div class="command-card" data-search="freebie generator playbook guide lead magnet pdf">
+          <span class="command-name">/freebie-generator</span>
+          <span class="command-desc">Playbooks &amp; Guides erstellen</span>
+        </div>
+        <div class="command-card" data-search="creative engine bild generierung ki openrouter orchestrieren">
+          <span class="command-name">/creative-engine</span>
+          <span class="command-desc">KI-Bildgenerierung orchestrieren</span>
+        </div>
+        <div class="command-card" data-search="casinoverluste ads neon poppy casino creatives">
+          <span class="command-name">/casinoverluste-ads</span>
+          <span class="command-desc">5x Ads im NEON-Poppy Stil</span>
+        </div>
+        <div class="command-card" data-search="linkedin posts carousels strategie content">
+          <span class="command-name">/linkedin</span>
+          <span class="command-desc">Posts, Carousels &amp; Strategien</span>
+        </div>
+        <div class="command-card" data-search="recruiting ad stellenanzeige creatives homeoffice">
+          <span class="command-name">/recruiting-ad</span>
+          <span class="command-desc">3x Recruiting-Creatives</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALL ARTICLES LIST -->
+  <section class="article-list-section" id="alleArtikel">
+    <div class="article-list-inner">
+      <div class="article-list-header">
+        <div class="section-pill">Alle Inhalte</div>
+        <h2>Alle Artikel</h2>
+      </div>
+
+      <!-- Erste Schritte -->
+      <div class="article-list-category">
+        <h3>Erste Schritte</h3>
+        <hr class="list-divider">
+        <a href="articles/claude-code-einrichten.html" class="article-list-item" data-search="claude code terminal einrichten setup installation erste schritte befehle">
+          <span class="item-title">Claude Code im Terminal einrichten</span>
+          <span class="item-desc">Installation, Setup, erste Befehle und CLAUDE.md verstehen</span>
+          <span class="item-meta">8 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/eigene-skills-bauen.html" class="article-list-item" data-search="eigene skills bauen erstellen workflow automatisieren skill.md">
+          <span class="item-title">Eigene Skills bauen</span>
+          <span class="item-desc">SKILL.md schreiben, Referenzen nutzen, Workflows automatisieren</span>
+          <span class="item-meta">10 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/faq.html" class="article-list-item" data-search="faq häufig gestellte fragen hilfe troubleshooting kosten">
+          <span class="item-title">FAQ &mdash; Häufig gestellte Fragen</span>
+          <span class="item-desc">Kosten, Troubleshooting, Setup-Probleme und Best Practices</span>
+          <span class="item-meta">5 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- MCP-Integrationen -->
+      <div class="article-list-category">
+        <h3>MCP-Integrationen</h3>
+        <hr class="list-divider">
+        <a href="articles/mcp-integrationen.html" class="article-list-item" data-search="mcp server integrationen übersicht verbinden konfigurieren">
+          <span class="item-title">MCP-Server Übersicht</span>
+          <span class="item-desc">Was MCPs sind und wie du alle 7 Integrationen verbindest</span>
+          <span class="item-meta">6 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/figma-mcp.html" class="article-list-item" data-search="figma mcp design plugin api komponenten variablen design system">
+          <span class="item-title">Figma MCP Deep Dive</span>
+          <span class="item-desc">Design-to-Code, Code-to-Design, Components und Variables</span>
+          <span class="item-meta">12 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/higgsfield.html" class="article-list-item" data-search="higgsfield bild video generierung gpt image ki modelle soul character">
+          <span class="item-title">Higgsfield Deep Dive</span>
+          <span class="item-desc">KI-Bilder &amp; Videos generieren, Modelle, Soul Characters, Plugins</span>
+          <span class="item-meta">10 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/onepage-mcp.html" class="article-list-item" data-search="onepage mcp website landingpage builder kunden">
+          <span class="item-title">Onepage MCP &mdash; Websites bauen</span>
+          <span class="item-desc">Kunden-Landingpages per Prompt erstellen, Onepage vs. Astro</span>
+          <span class="item-meta">8 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Skills & Workflows -->
+      <div class="article-list-category">
+        <h3>Skills &amp; Workflows</h3>
+        <hr class="list-divider">
+        <a href="articles/skills-uebersicht.html" class="article-list-item" data-search="skills übersicht alle 21 slash befehle ad-session d4y freebie logo">
+          <span class="item-title">Alle 21 Skills im Überblick</span>
+          <span class="item-desc">Komplette Referenz: Ad-Session, D4Y, Logo, Freebie Generator und mehr</span>
+          <span class="item-meta">15 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/eigene-skills-bauen.html" class="article-list-item" data-search="skills bauen erstellen custom workflow skill.md referenzen">
+          <span class="item-title">Eigene Skills erstellen</span>
+          <span class="item-desc">Von der SKILL.md bis zum fertigen Workflow &mdash; Schritt für Schritt</span>
+          <span class="item-meta">10 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/cold-mailing.html" class="article-list-item" data-search="cold mailing e-mail copy outreach sequenzen kaltakquise">
+          <span class="item-title">Cold Mailing &amp; E-Mail Copy</span>
+          <span class="item-desc">AI-gestützte Outreach-Sequenzen erstellen</span>
+          <span class="item-meta">7 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/freebies-deep-dive.html" class="article-list-item" data-search="freebies lead magnets playbook guide pdf figma freebie generator">
+          <span class="item-title">Freebies &amp; Lead Magnets</span>
+          <span class="item-desc">Von AD Copy Text bis fertiges PDF &amp; Figma</span>
+          <span class="item-meta">10 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Fortgeschritten -->
+      <div class="article-list-category">
+        <h3>Fortgeschritten</h3>
+        <hr class="list-divider">
+        <a href="articles/multi-agent-workflows.html" class="article-list-item" data-search="multi agent workflows teams tmux parallel subagents orchestrieren">
+          <span class="item-title">Multi-Agent Workflows</span>
+          <span class="item-desc">AI-Teams orchestrieren, Tmux, Subagents, paralleles Arbeiten</span>
+          <span class="item-meta">8 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/ai-tools-landschaft.html" class="article-list-item" data-search="ai tools landschaft opencut premiere davinci video editing browser extensions">
+          <span class="item-title">AI Tool-Landschaft</span>
+          <span class="item-desc">Alle Tools im Überblick: OpenCut, Higgsfield Plugins, Helfer-Tools</span>
+          <span class="item-meta">7 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/seo-blog-pipeline.html" class="article-list-item" data-search="seo blog pipeline astro cms content automatisiert">
+          <span class="item-title">SEO &amp; Blog Pipeline</span>
+          <span class="item-desc">Automatisierter Content mit Astro + CMS</span>
+          <span class="item-meta">8 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TEAM EXPERTISE -->
+  <section class="section section-dark">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-pill">Team Expertise</div>
+        <h2 class="section-title">Wer kann dir <em>helfen?</em></h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card" data-search="lea ai creative video ads bild creatives präsentationen logos webseiten">
+          <div class="team-card-name">Lea</div>
+          <div class="team-card-role">AI Creative</div>
+          <ul>
+            <li>Video-Ads &amp; Bild-Creatives</li>
+            <li>Präsentationen &amp; Logos</li>
+            <li>Webseiten</li>
+          </ul>
+        </div>
+        <div class="team-card" data-search="tim ai marketing ad copy cold mailing kurse kunden skills">
+          <div class="team-card-name">Tim</div>
+          <div class="team-card-role">AI Marketing</div>
+          <ul>
+            <li>AD Copy &amp; Cold Mailing</li>
+            <li>Marketing Kurse</li>
+            <li>Kunden-Skills</li>
+          </ul>
+        </div>
+        <div class="team-card" data-search="ben ai content editing motion design graphics short cutting podcast">
+          <div class="team-card-name">Ben</div>
+          <div class="team-card-role">AI Content &amp; Editing</div>
+          <ul>
+            <li>Motion Design Graphics</li>
+            <li>Short Cutting</li>
+            <li>Podcast Cutting</li>
+          </ul>
+        </div>
+        <div class="team-card" data-search="nicole ai operations sheets dashboards automationen">
+          <div class="team-card-name">Nicole</div>
+          <div class="team-card-role">AI Operations</div>
+          <ul>
+            <li>Sheets &amp; Dashboards</li>
+            <li>Automationen</li>
+          </ul>
+        </div>
+        <div class="team-card" data-search="angelo ai crm close flows automationen instantly setup 2-way sync">
+          <div class="team-card-name">Angelo</div>
+          <div class="team-card-role">AI CRM</div>
+          <ul>
+            <li>Close Flows &amp; Automationen</li>
+            <li>Instantly Setup</li>
+            <li>2-Way Sync</li>
+          </ul>
+        </div>
+        <div class="team-card" data-search="sabrina ai automationen marketing dashboards wiederkehrende tätigkeiten claude webseiten">
+          <div class="team-card-name">Sabrina</div>
+          <div class="team-card-role">AI Automationen</div>
+          <ul>
+            <li>Marketing Dashboards</li>
+            <li>Wiederkehrende Tätigkeiten</li>
+            <li>Claude Webseiten</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK FAQ -->
+  <section class="section section-dark" style="padding-top: 0;">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-pill">Schnelle Antworten</div>
+        <h2 class="section-title">Die wichtigsten <em>Fragen</em></h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Was ist Claude Code und was kann es?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Claude Code ist ein KI-Assistent, der direkt in deinem Terminal läuft. Er kann Code schreiben, Dateien bearbeiten, Git-Commits erstellen, mit externen Tools wie Figma oder Asana interagieren und komplexe Workflows automatisieren. Über sogenannte Skills und MCP-Integrationen wird Claude Code zu einer vollständigen Content Engine für Ad-Erstellung, Design-Automatisierung und mehr.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Welche MCP-Integrationen sind verfügbar?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Aktuell sind 7 MCP-Server konfiguriert: <strong>Asana</strong> (Projektmanagement), <strong>Figma</strong> (Design-Automatisierung), <strong>Google Drive</strong> (Dateiverwaltung, Sheets, Docs), <strong>Higgsfield</strong> (KI-Bild- & Videogenerierung), <strong>Close CRM</strong> (Sales & Lead-Management), <strong>Gmail</strong> (E-Mail-Automatisierung) und <strong>Google Calendar</strong> (Terminplanung). Jeder MCP erweitert Claude Code um spezifische Fähigkeiten.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Was kostet die Nutzung der KI-Bildgenerierung?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Die Kosten variieren je nach Modell: <strong>Nano Banana 2</strong> (Gemini Flash) kostet ca. $0.02 pro Bild, <strong>Seedream 4.5</strong> und <strong>Flux Pro</strong> jeweils $0.04, <strong>Ideogram V2</strong> $0.08 und <strong>Nano Banana Pro</strong> (Gemini Pro) ca. $0.14. Über Higgsfield kostet GPT Image 2 etwa 4 Credits pro Bild. Claude Code zeigt dir immer einen Kostenvoranschlag bevor generiert wird.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Wie starte ich meinen ersten Skill?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Tippe einfach den Skill-Namen mit einem Slash ein, z.B. <code>/ad-session</code>, <code>/d4y</code> oder <code>/logo</code>. Claude Code erkennt den Befehl und führt den entsprechenden Workflow automatisch aus. Jeder Skill hat eine eigene Dokumentation in der SKILL.md Datei, die beschreibt was er macht und welche Eingaben er braucht.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen, MCP-Integrationen und Workflow-Dokumentation.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Kategorien</h4>
+          <ul>
+            <li><a href="articles/claude-code-einrichten.html">Erste Schritte</a></li>
+            <li><a href="articles/mcp-integrationen.html">MCP-Integrationen</a></li>
+            <li><a href="articles/skills-uebersicht.html">Skills</a></li>
+            <li><a href="articles/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Deep Dives</h4>
+          <ul>
+            <li><a href="articles/figma-mcp.html">Figma MCP</a></li>
+            <li><a href="articles/higgsfield.html">Higgsfield</a></li>
+            <li><a href="articles/onepage-mcp.html">Onepage MCP</a></li>
+            <li><a href="articles/ai-tools-landschaft.html">AI Tools</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+  <script>
+    // Search
+    const searchInput = document.getElementById('searchInput');
+    const searchItems = document.querySelectorAll('[data-search]');
+    const categories = document.querySelectorAll('.article-list-category');
+
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      searchItems.forEach(el => {
+        const text = el.dataset.search + ' ' + el.textContent.toLowerCase();
+        el.style.display = (!q || text.includes(q)) ? '' : 'none';
+      });
+      // Hide empty category headers when filtering
+      categories.forEach(cat => {
+        const visible = cat.querySelectorAll('.article-list-item:not([style*="display: none"])');
+        cat.style.display = (!q || visible.length > 0) ? '' : 'none';
+      });
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const wasOpen = item.classList.contains('open');
+        item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
