@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eigene Skills bauen &mdash; Heartbeat KB</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -45,102 +46,117 @@
 
   <article class="article-content">
 
-    <div class="video-placeholder">
-      <div class="video-play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <span class="video-label">Video: Deinen ersten Skill erstellen</span>
-    </div>
-
     <h2>Was ist ein Skill?</h2>
-    <p>Ein Skill ist ein wiederverwendbarer Workflow, den Claude Code mit einem Slash-Befehl aktiviert. Statt jedes Mal den gleichen Prompt zu schreiben, definierst du den Ablauf einmal als Skill &mdash; und kannst ihn danach jederzeit mit <code>/mein-skill</code> aufrufen.</p>
+    <p>Ein Skill ist ein <strong>wiederverwendbarer Workflow</strong>, der über einen Slash-Befehl aktiviert wird. Statt Claude Code jedes Mal von Grund auf zu erklären, was er tun soll, definierst du den Ablauf einmal &mdash; und rufst ihn danach mit einem einzigen Befehl wie <code>/cold-mailing</code> oder <code>/logo</code> auf.</p>
+    <p>Skills sind der Kern der Heartbeat Content Engine. Sie machen den Unterschied zwischen "KI als Chatbot" und "KI als automatisiertes Produktionssystem".</p>
 
     <h2>Anatomie eines Skills</h2>
-    <p>Jeder Skill ist ein Ordner unter <code>.claude/skills/</code> mit mindestens einer <code>SKILL.md</code> Datei:</p>
+    <p>Jeder Skill lebt in einem eigenen Ordner unter <code>.claude/skills/</code> und hat eine feste Struktur:</p>
 
     <pre><code>.claude/skills/mein-skill/
-├── SKILL.md              # Pflicht: Skill-Definition
-├── references/           # Optional: Referenz-Dokumente
-│   ├── sop.md           # z.B. Standard Operating Procedure
-│   └── templates.md     # z.B. Prompt-Templates
-└── scripts/             # Optional: Python/Bash Scripts
-    └── helper.py</code></pre>
+  SKILL.md            # Hauptdatei: Trigger, Workflow, Regeln
+  references/         # SOPs, Templates, Beispiele
+    template.md
+    design-rules.md
+    beispiel-output.md
+  scripts/            # Optional: Python/JS Helper-Scripts
+    generate.py</code></pre>
+
+    <div class="info-box">
+      <p><strong>Wichtig:</strong> Die <code>SKILL.md</code> ist die einzige Datei, die Claude Code automatisch liest wenn der Skill getriggert wird. Alles in <code>references/</code> muss in der SKILL.md explizit referenziert werden.</p>
+    </div>
 
     <h2>Die SKILL.md Datei</h2>
-    <p>Die <code>SKILL.md</code> ist das Herzstück. Sie sagt Claude Code <strong>wann</strong> der Skill aktiviert wird, <strong>was</strong> er tun soll und <strong>wie</strong> er arbeiten soll.</p>
+    <p>Die SKILL.md hat drei Kernbereiche: <strong>Trigger</strong> (wann wird der Skill aktiviert), <strong>Workflow</strong> (was passiert Schritt für Schritt) und <strong>Regeln</strong> (welche Constraints gelten).</p>
 
-    <pre><code># Mein Skill Name
+    <pre><code># Mein Skill
 
 ## Trigger
-Dieser Skill wird aktiviert wenn der User "/mein-skill"
-sagt oder "mach mir ein XYZ".
+Dieser Skill wird aktiviert wenn der User "/mein-skill" sagt
+oder "erstelle mir XY" anfragt.
 
 ## Workflow
-1. Frage den User nach [Input A] und [Input B]
-2. Lese die Referenz-Datei references/sop.md
-3. Erstelle [Output] basierend auf den Inputs
-4. Speichere das Ergebnis in output/
+1. Kundendaten sammeln (Name, Branche, Zielgruppe)
+2. Referenz-Datei lesen: references/template.md
+3. Content nach Template generieren
+4. Design-Regeln aus references/design-rules.md anwenden
+5. Output in output/ Ordner speichern
+6. Ordner im Finder öffnen
 
 ## Regeln
-- Immer deutschen Text verwenden
-- Kosten vorab zeigen bei API-Aufrufen
-- Output-Ordner nach Fertigstellung öffnen</code></pre>
+- IMMER echte Umlaute (ä, ö, ü) verwenden
+- Maximal 3 Varianten pro Durchlauf
+- Output-Format: PNG, 1080x1080px
+- Kosten vorab anzeigen und Bestätigung einholen</code></pre>
 
-    <h3>Best Practices für SKILL.md</h3>
+    <h2>Best Practices</h2>
     <ul>
-      <li><strong>Klare Trigger definieren:</strong> Liste alle Phrasen auf, die den Skill aktivieren sollen</li>
-      <li><strong>Workflow nummeriert:</strong> Schritte klar durchnummerieren, damit Claude Code den Ablauf versteht</li>
-      <li><strong>Regeln explizit:</strong> Alles was IMMER gelten soll als Regel formulieren</li>
-      <li><strong>Referenzen nutzen:</strong> Komplexe Informationen in <code>references/</code> auslagern, nicht alles in die SKILL.md packen</li>
-      <li><strong>Outputs definieren:</strong> Klar sagen wo und in welchem Format das Ergebnis landen soll</li>
+      <li><strong>Klare Trigger:</strong> Definiere exakt, welche Phrasen den Skill aktivieren sollen. Je eindeutiger, desto weniger Fehlauslösungen.</li>
+      <li><strong>Nummerierter Workflow:</strong> Jeder Schritt bekommt eine Nummer. Claude Code arbeitet die Schritte sequentiell ab und überspringt nichts.</li>
+      <li><strong>Explizite Regeln:</strong> Alles was immer gelten soll (Sprache, Format, Größe, Stil) gehört in die Regeln. Keine Annahmen.</li>
+      <li><strong>References nutzen:</strong> Große Templates, Beispiele und SOPs in eigene Dateien auslagern statt alles in die SKILL.md zu packen.</li>
+      <li><strong>Output definieren:</strong> Wo landen die Ergebnisse? Welches Format? Welcher Dateiname? Klar definieren.</li>
     </ul>
 
     <h2>Referenz-Dateien</h2>
-    <p>Der <code>references/</code> Ordner enthält alles was Claude Code als Kontext braucht:</p>
-    <ul>
-      <li><strong>SOPs:</strong> Standard Operating Procedures &mdash; der "goldene Pfad" für den Workflow</li>
-      <li><strong>Templates:</strong> Prompt-Templates, Text-Vorlagen, Formatierungsregeln</li>
-      <li><strong>Beispiele:</strong> Gute Beispiel-Outputs als Referenz</li>
-      <li><strong>Design-Regeln:</strong> CI-Farben, Fonts, Layout-Vorgaben</li>
-    </ul>
+    <p>Der <code>references/</code> Ordner enthält alles, was der Skill als Kontext braucht:</p>
 
-    <div class="info-box">
-      <p><strong>Tipp:</strong> Claude Code liest Referenz-Dateien automatisch wenn sie in der SKILL.md referenziert werden. Du musst sie nicht manuell laden. Nutze Formulierungen wie "Lese references/sop.md für die genauen Regeln".</p>
-    </div>
+    <table class="content-table">
+      <thead>
+        <tr><th>Typ</th><th>Zweck</th><th>Beispiel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>SOPs</strong></td><td>Standard Operating Procedures für den Workflow</td><td><code>sop-ad-erstellung.md</code></td></tr>
+        <tr><td><strong>Templates</strong></td><td>Vorlagen für den generierten Output</td><td><code>email-template.md</code></td></tr>
+        <tr><td><strong>Beispiele</strong></td><td>Konkrete Beispiel-Outputs als Qualitätsreferenz</td><td><code>beispiel-output.md</code></td></tr>
+        <tr><td><strong>Design-Regeln</strong></td><td>CI-Farben, Schriften, Layout-Constraints</td><td><code>design-rules.md</code></td></tr>
+      </tbody>
+    </table>
 
     <h2>Beispiel: Cold Mailing Skill</h2>
-    <p>Ein konkretes Beispiel &mdash; ein Skill für automatisierte Cold-Mailing-Sequenzen:</p>
+    <p>Ein vollständiges Beispiel eines produktiven Skills:</p>
 
     <pre><code># Cold Mailing Skill
 
 ## Trigger
-/cold-mailing, "E-Mail Sequenz erstellen",
-"Cold Outreach", "Mailing Kampagne"
+Dieser Skill wird aktiviert wenn der User "/cold-mailing" sagt,
+"E-Mail-Sequenz erstellen" oder "Cold Mails schreiben" anfragt.
 
 ## Workflow
-1. Zielgruppe + Angebot vom User erfragen
-2. references/email-frameworks.md lesen
-3. 5-E-Mail-Sequenz generieren:
-   - E-Mail 1: Cold Opener (Pain Point)
-   - E-Mail 2: Value Add (Case Study)
-   - E-Mail 3: Social Proof
-   - E-Mail 4: Objection Handler
-   - E-Mail 5: Break-Up Email
-4. Betreffzeilen-Varianten (je 3 pro E-Mail)
-5. Als Markdown-Datei speichern
+1. Marketing Offer Framework abfragen:
+   - Zielgruppe (Rolle, Branche, Unternehmensgröße)
+   - Pain Point (konkret, messbar)
+   - Angebot (Ergebnis, nicht Produkt)
+   - Social Proof (Zahlen, Namen, Zeiträume)
+   - Häufigster Einwand
+   - Gewünschter CTA
+2. Optional: Lead-Daten aus Close CRM abrufen (MCP)
+3. Referenz lesen: references/email-templates.md
+4. 5-E-Mail-Sequenz generieren:
+   - E-Mail 1: Cold Opener (Problem benennen)
+   - E-Mail 2: Value Add (Mehrwert liefern)
+   - E-Mail 3: Social Proof (Ergebnisse zeigen)
+   - E-Mail 4: Objection Handler (Einwand entkräften)
+   - E-Mail 5: Break-Up (letzte Chance)
+5. 3 Betreffzeilen-Varianten pro E-Mail (A/B/C)
+6. Output als Markdown speichern
 
 ## Regeln
 - Deutsche Sprache, Sie-Form
+- Max. 150 Wörter pro E-Mail
+- Max. 50 Zeichen pro Betreffzeile
 - Keine Spam-Trigger-Wörter
-- Jede E-Mail max. 150 Wörter
-- Betreffzeilen max. 50 Zeichen</code></pre>
+- Ein CTA pro E-Mail
+- Kein HTML, Plain-Text-Format</code></pre>
 
-    <h2>Skill testen und iterieren</h2>
+    <h2>Testen und Iterieren</h2>
+    <p>Ein Skill wird selten beim ersten Mal perfekt sein. Der Entwicklungsprozess ist iterativ:</p>
+
     <div class="steps">
       <div class="step">
         <div class="step-content">
-          <h4>Erstversion schreiben</h4>
-          <p>Erstelle die SKILL.md mit dem grundlegenden Workflow. Halte es einfach &mdash; du kannst später erweitern.</p>
+          <h4>SKILL.md schreiben</h4>
+          <p>Starte mit einer ersten Version. Trigger, Workflow und die wichtigsten Regeln definieren.</p>
         </div>
       </div>
       <div class="step">
@@ -214,5 +230,21 @@ sagt oder "mach mir ein XYZ".
     </div>
   </footer>
 
+<script>
+document.querySelectorAll("article pre, .tab-panel pre").forEach(pre => {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.innerHTML = "Kopieren";
+  btn.addEventListener("click", () => {
+    const code = pre.querySelector("code") || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.innerHTML = "Kopiert!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = "Kopieren"; btn.classList.remove("copied"); }, 2000);
+    });
+  });
+  pre.appendChild(btn);
+});
+</script>
 </body>
 </html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipps &amp; Tricks &mdash; Heartbeat KB</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .tabs-nav {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 12px;
+      background: var(--bg-white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+      background: var(--accent-soft);
+    }
+    .tab-btn.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 16px rgba(251, 132, 28, 0.3);
+    }
+    .tab-btn .tab-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      transition: background 0.2s;
+    }
+    .tab-btn .tab-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tab-btn.active .tab-icon {
+      background: rgba(255,255,255,0.2);
+    }
+    .tab-btn.active .tab-icon svg {
+      stroke: white;
+    }
+    .tab-panel {
+      display: none;
+      animation: tabFade 0.3s ease;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes tabFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .tabs-nav {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .tab-btn {
+        padding: 14px 8px;
+        font-size: 11px;
+      }
+      .tab-btn .tab-icon {
+        width: 30px;
+        height: 30px;
+      }
+      .tab-btn .tab-icon svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html" class="active">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html">MCPs</a></li>
+        <li><a href="skills-uebersicht.html">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <span class="current">Tipps &amp; Tricks</span>
+      </div>
+      <h1>Tipps &amp; Tricks für den <em>Alltag</em></h1>
+      <div class="article-meta">
+        <span class="tag">Power User</span>
+        <span>&#128214; 6 Min. Lesezeit</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content">
+
+    <p>Kleine Dinge, die den Unterschied machen. Wähle ein Thema:</p>
+
+    <!-- TABS NAV -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="alias">
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+        Aliases
+      </button>
+      <button class="tab-btn" data-tab="tokens">
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></span>
+        Tokens
+      </button>
+      <button class="tab-btn" data-tab="flux">
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+        Flux MD
+      </button>
+      <button class="tab-btn" data-tab="remote">
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
+        Remote
+      </button>
+      <button class="tab-btn" data-tab="asana">
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+        Asana
+      </button>
+    </div>
+
+    <!-- TAB: ALIAS -->
+    <div class="tab-panel active" id="tab-alias">
+      <h2>Terminal-Alias: Sofort zu Claude Code springen</h2>
+      <p>Statt jedes Mal <code>cd ~/dein-projekt-ordner &amp;&amp; claude</code> zu tippen, legst du dir einen Alias an. Ein Befehl &mdash; und du bist drin.</p>
+
+      <h3>Alias einrichten (Zsh)</h3>
+      <p>Öffne deine <code>~/.zshrc</code> und füge am Ende hinzu:</p>
+      <pre><code># Claude Code Shortcuts
+alias cc="cd ~/dein-projekt-ordner && claude"
+alias ccc="claude --continue"
+alias ccr="claude --resume"</code></pre>
+
+      <div class="info-box">
+        <p><strong>Hinweis:</strong> Ersetze <code>~/dein-projekt-ordner</code> durch den tatsächlichen Pfad zu deinem geklonten Repo, z.B. <code>~/Repos/mein-projekt</code> oder <code>~/Documents/content-engine</code>.</p>
+      </div>
+
+      <p>Danach einmal neu laden:</p>
+      <pre><code>source ~/.zshrc</code></pre>
+
+      <p>Ab jetzt tippst du nur noch <code>cc</code> und landest direkt in Claude Code im richtigen Projekt.</p>
+
+      <div class="info-box">
+        <p><strong>Tipp:</strong> Du kannst für jedes Projekt einen eigenen Alias anlegen: <code>alias cc-projekt2="cd ~/Repos/anderes-projekt && claude"</code>. So springst du mit einem Wort in jedes Projekt.</p>
+      </div>
+
+      <h3>Nützliche Alias-Ideen</h3>
+      <table class="content-table">
+        <thead>
+          <tr>
+            <th>Alias</th>
+            <th>Befehl</th>
+            <th>Was er macht</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>cc</code></td>
+            <td><code>cd ~/dein-projekt-ordner &amp;&amp; claude</code></td>
+            <td>Hauptprojekt öffnen</td>
+          </tr>
+          <tr>
+            <td><code>ccc</code></td>
+            <td><code>claude --continue</code></td>
+            <td>Letzte Konversation fortsetzen</td>
+          </tr>
+          <tr>
+            <td><code>ccr</code></td>
+            <td><code>claude --resume</code></td>
+            <td>Bestimmte Session fortsetzen</td>
+          </tr>
+          <tr>
+            <td><code>ccs</code></td>
+            <td><code>claude --print-skill-list</code></td>
+            <td>Alle Skills auflisten</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB: TOKENS -->
+    <div class="tab-panel" id="tab-tokens">
+      <h2>Token-Verbrauch abfragen</h2>
+      <p>Du willst wissen, wie viele Tokens du diesen Monat verbraucht hast? Dafür gibt es <code>ccusage</code> &mdash; ein kleines CLI-Tool das dir eine Übersicht gibt.</p>
+
+      <h3>Aktuellen Monat anzeigen</h3>
+      <pre><code>npx ccusage@latest</code></pre>
+
+      <h3>Bestimmten Zeitraum abfragen</h3>
+      <pre><code>npx ccusage@latest monthly --since 20260601 --until 20260630</code></pre>
+
+      <p>Das zeigt dir eine Aufschlüsselung nach Tagen, Modellen und Gesamtverbrauch. Besonders nützlich um den Überblick über Kosten zu behalten.</p>
+
+      <div class="info-box">
+        <p><strong>Kein Install nötig:</strong> <code>npx</code> lädt und führt das Tool direkt aus, ohne es dauerhaft zu installieren.</p>
+      </div>
+    </div>
+
+    <!-- TAB: FLUX -->
+    <div class="tab-panel" id="tab-flux">
+      <h2>Markdown-Vorschau mit Flux</h2>
+      <p>Claude Code gibt viel Markdown aus &mdash; SKILL.md Dateien, Dokumentation, Notizen. Mit <strong>Flux</strong> bekommst du eine schicke Live-Vorschau direkt auf dem Mac.</p>
+
+      <h3>Installation</h3>
+      <pre><code>brew install --cask xykong/tap/flux-markdown</code></pre>
+
+      <p>Nach der Installation kannst du jede <code>.md</code> Datei mit Flux öffnen und bekommst eine formatierte Ansicht mit Syntax-Highlighting, Tabellen und Bildern &mdash; deutlich besser lesbar als Rohtext im Terminal.</p>
+
+      <div class="info-box">
+        <p><strong>Tipp:</strong> Rechtsklick auf eine <code>.md</code> Datei im Finder &rarr; "Öffnen mit" &rarr; Flux. Du kannst es auch als Standard-App für <code>.md</code> Dateien festlegen.</p>
+      </div>
+    </div>
+
+    <!-- TAB: REMOTE -->
+    <div class="tab-panel" id="tab-remote">
+      <h2>Remote Control: Claude Code vom Handy steuern</h2>
+      <p>Mit <code>/remote-control</code> kannst du Claude Code von deinem Smartphone aus steuern. Perfekt wenn du am Laptop etwas laufen lassen willst, aber gerade unterwegs bist.</p>
+
+      <h3>So funktioniert es</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-content">
+            <h4>Remote Control starten</h4>
+            <p>Tippe <code>/remote-control</code> in Claude Code. Du bekommst einen QR-Code und einen Link.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <h4>Auf dem Handy verbinden</h4>
+            <p>Scanne den QR-Code oder öffne den Link auf deinem Smartphone.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <h4>Befehle senden</h4>
+            <p>Du kannst jetzt vom Handy aus Text-Inputs an Claude Code schicken. Die Ausgabe siehst du auf dem Laptop.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <p><strong>Use Case:</strong> Du startest einen längeren Generierungs-Workflow am Laptop, gehst in die Küche, und bestätigst die Kostenfreigabe bequem vom Handy aus &mdash; "ja, generieren".</p>
+      </div>
+    </div>
+
+    <!-- TAB: ASANA -->
+    <div class="tab-panel" id="tab-asana">
+      <h2>Asana MCP: Schnell-Setup</h2>
+      <p>Der Asana MCP verbindet Claude Code mit deinem Projektmanagement. Du brauchst einen persönlichen Access Token.</p>
+
+      <h3>Token erstellen</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-content">
+            <h4>Asana Developer Console öffnen</h4>
+            <p>Gehe in Asana zu <strong>Mein Profil</strong> &rarr; <strong>Apps</strong> &rarr; <strong>Developer Apps</strong> &rarr; <strong>Personal Access Token</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <h4>Token generieren</h4>
+            <p>Erstelle einen neuen Token und kopiere ihn. Den Token brauchst du nur einmal &mdash; danach ist er in der Konfiguration gespeichert.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-content">
+            <h4>In .mcp.json eintragen</h4>
+            <p>Der Token wird als Umgebungsvariable <code>ASANA_ACCESS_TOKEN</code> in der MCP-Konfiguration hinterlegt.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Was du damit machen kannst</h3>
+      <ul>
+        <li><strong>Tasks erstellen:</strong> "Erstelle einen Task für das Logo-Projekt in Asana"</li>
+        <li><strong>Projekte durchsuchen:</strong> "Welche Tasks sind diese Woche fällig?"</li>
+        <li><strong>Subtasks anlegen:</strong> Automatisch Unteraufgaben für Workflows generieren</li>
+        <li><strong>Status abfragen:</strong> "Was ist der Stand beim Onboarding-Projekt?"</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="claude-code-einrichten.html" class="article-card">
+          <span class="article-card-tag">Basics</span>
+          <h3>Claude Code einrichten</h3>
+          <p>Noch nicht eingerichtet? Hier geht's zum kompletten Setup.</p>
+          <div class="article-card-meta"><span>&#128214; 8 Min.</span></div>
+        </a>
+        <a href="ai-tools-landschaft.html" class="article-card">
+          <span class="article-card-tag">Übersicht</span>
+          <h3>AI Tool-Landschaft</h3>
+          <p>Alle Tools und Helfer im Überblick.</p>
+          <div class="article-card-meta"><span>&#128214; 7 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Kategorien</h4><ul>
+          <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+          <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+          <li><a href="skills-uebersicht.html">Skills</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+      });
+    });
+  </script>
+
+<script>
+document.querySelectorAll("article pre, .tab-panel pre").forEach(pre => {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.innerHTML = "Kopieren";
+  btn.addEventListener("click", () => {
+    const code = pre.querySelector("code") || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.innerHTML = "Kopiert!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = "Kopieren"; btn.classList.remove("copied"); }, 2000);
+    });
+  });
+  pre.appendChild(btn);
+});
+</script>
+</body>
+</html>

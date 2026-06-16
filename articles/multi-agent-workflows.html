@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Multi-Agent Workflows &mdash; Heartbeat KB</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -43,110 +44,136 @@
 
   <article class="article-content">
 
-    <div class="video-placeholder">
-      <div class="video-play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <span class="video-label">Video: Multi-Agent Setup in der Praxis</span>
-    </div>
-
     <h2>Was sind Multi-Agent Workflows?</h2>
-    <p>Statt einem einzelnen Claude Code für alles, kannst du <strong>mehrere Instanzen gleichzeitig</strong> laufen lassen &mdash; jede mit einer spezialisierten Rolle. Das ist wie ein Team aus AI-Spezialisten, die parallel arbeiten.</p>
+    <p>Statt einer einzelnen Claude Code Instanz, die alles alleine macht, lässt du <strong>mehrere spezialisierte Instanzen parallel arbeiten</strong>. Jede Instanz hat eine klar definierte Rolle &mdash; wie ein echtes Team, nur dass jedes Mitglied eine KI ist.</p>
+    <p>Das Ergebnis: schnellere Durchläufe, bessere Qualität durch Spezialisierung und eingebaute Qualitätskontrolle, weil ein Agent den Output eines anderen prüft.</p>
 
-    <h3>Typische Agent-Rollen</h3>
+    <h2>Typische Agenten-Rollen</h2>
     <table class="content-table">
       <thead>
-        <tr>
-          <th>Agent</th>
-          <th>Rolle</th>
-          <th>Aufgabe</th>
-        </tr>
+        <tr><th>Rolle</th><th>Aufgabe</th><th>Beispiel-Anweisung</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>Designer</strong></td>
-          <td>Creative Direction</td>
-          <td>Layout, Farbschema, Bildauswahl</td>
-        </tr>
-        <tr>
-          <td><strong>Frontend Dev</strong></td>
-          <td>Implementierung</td>
-          <td>HTML/CSS/JS Code schreiben</td>
-        </tr>
-        <tr>
-          <td><strong>CTO / Reviewer</strong></td>
-          <td>Qualitätssicherung</td>
-          <td>Code Review, Architektur-Entscheidungen</td>
-        </tr>
-        <tr>
-          <td><strong>QA</strong></td>
-          <td>Testing</td>
-          <td>Testen, Bugs finden, Edge Cases</td>
-        </tr>
+        <tr><td><strong>Designer</strong></td><td>Creative Direction</td><td>"Erstelle 3 Designkonzepte für die Landingpage"</td></tr>
+        <tr><td><strong>Frontend Dev</strong></td><td>Implementation</td><td>"Setze das Design in HTML/CSS um"</td></tr>
+        <tr><td><strong>CTO / Reviewer</strong></td><td>Quality Assurance</td><td>"Prüfe den Code auf Best Practices und Performance"</td></tr>
+        <tr><td><strong>QA</strong></td><td>Testing</td><td>"Teste alle Links, Responsiveness und Accessibility"</td></tr>
       </tbody>
     </table>
 
     <h2>Setup mit Tmux</h2>
-    <p>Der einfachste Weg mehrere Claude-Instanzen parallel zu nutzen ist <strong>Tmux</strong> (Terminal Multiplexer). Du kannst dein Terminal in mehrere Panels aufteilen, in jedem eine Claude-Instanz starten.</p>
+    <p><strong>Tmux</strong> (Terminal Multiplexer) ist das ideale Werkzeug für Multi-Agent Workflows. Du kannst mehrere Terminal-Panes in einem Fenster öffnen und in jedem eine eigene Claude Code Instanz starten.</p>
 
-    <pre><code># Tmux starten
-tmux new -s agents
-
-# Panel horizontal teilen
-Ctrl+B, dann %
-
-# Panel vertikal teilen
-Ctrl+B, dann "
-
-# Zwischen Panels wechseln
-Ctrl+B, dann Pfeiltaste</code></pre>
-
-    <h2>Wann lohnt sich Multi-Agent?</h2>
-
-    <div class="info-box">
-      <p><strong>Faustregel:</strong> Multi-Agent lohnt sich wenn du einen Workflow hast, bei dem <strong>verschiedene Perspektiven</strong> einen Mehrwert bringen, oder wenn Aufgaben <strong>parallel</strong> stattfinden können. Für einfache, lineare Tasks ist ein einzelner Agent effizienter.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <h4>Tmux-Session starten</h4>
+          <p>Erstelle eine neue benannte Session für dein Agenten-Team:</p>
+        </div>
+      </div>
     </div>
 
-    <h3>Gut geeignet:</h3>
+    <pre><code>tmux new -s agents</code></pre>
+
+    <div class="steps">
+      <div class="step" style="counter-increment: step 1;">
+        <div class="step-content">
+          <h4>Panes aufteilen</h4>
+          <p>Teile das Fenster horizontal und vertikal auf, sodass du mehrere Bereiche hast:</p>
+        </div>
+      </div>
+    </div>
+
+    <pre><code># Vertikal teilen
+Ctrl+B %
+
+# Horizontal teilen
+Ctrl+B "
+
+# Zwischen Panes wechseln
+Ctrl+B Pfeiltaste</code></pre>
+
+    <div class="steps">
+      <div class="step" style="counter-increment: step 2;">
+        <div class="step-content">
+          <h4>Claude Code in jedem Pane starten</h4>
+          <p>Starte in jedem Pane eine Claude Code Instanz mit einer spezifischen Rolle. Gib jeder Instanz ihren Auftrag als erste Nachricht.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <p><strong>Tipp:</strong> Gib jedem Agenten in der ersten Nachricht eine klare Rollenanweisung: "Du bist der Frontend-Entwickler in diesem Team. Deine Aufgabe ist ausschließlich die Implementation in HTML/CSS."</p>
+    </div>
+
+    <h2>Wann ist Multi-Agent sinnvoll?</h2>
+
+    <h3>Gut geeignet</h3>
     <ul>
-      <li>Website-Entwicklung (Design + Code + QA parallel)</li>
-      <li>Code Review (unabhängige Reviews aus verschiedenen Perspektiven)</li>
-      <li>Content-Erstellung in großem Maßstab (mehrere Artikel gleichzeitig)</li>
-      <li>Research + Implementation parallel</li>
+      <li><strong>Website-Entwicklung:</strong> Designer entwirft, Developer setzt um, Reviewer prüft &mdash; parallel</li>
+      <li><strong>Code Review:</strong> Ein Agent schreibt Code, ein anderer reviewt ihn in Echtzeit</li>
+      <li><strong>Content at Scale:</strong> Mehrere Agenten erstellen gleichzeitig verschiedene Content-Pieces</li>
+      <li><strong>Research + Implementation:</strong> Ein Agent recherchiert, ein anderer setzt die Ergebnisse direkt um</li>
     </ul>
 
-    <h3>Weniger sinnvoll:</h3>
+    <h3>Nicht geeignet</h3>
     <ul>
-      <li>Einfache Dateibearbeitungen</li>
-      <li>Sequenzielle Workflows (ein Schritt hängt vom vorherigen ab)</li>
-      <li>Aufgaben die weniger als 5 Minuten dauern</li>
+      <li><strong>Einfache Edits:</strong> Eine einzelne Datei anpassen braucht kein Team</li>
+      <li><strong>Streng sequentielle Workflows:</strong> Wenn Schritt B zwingend auf Schritt A warten muss</li>
+      <li><strong>Tasks unter 5 Minuten:</strong> Der Setup-Overhead lohnt sich nicht</li>
     </ul>
 
     <h2>Claude Code Subagents</h2>
-    <p>Innerhalb einer Claude Code Session kannst du auch <strong>Subagents</strong> spawnen. Das sind spezialisierte Agents die im Hintergrund arbeiten und ihre Ergebnisse zurückliefern:</p>
-    <ul>
-      <li><strong>Explore Agent:</strong> Schnelle Code-Suche und Dateien finden</li>
-      <li><strong>Plan Agent:</strong> Implementierungspläne erstellen</li>
-      <li><strong>Code Review Agent:</strong> Änderungen prüfen</li>
-      <li><strong>General Purpose:</strong> Komplexe Recherche-Aufgaben</li>
-    </ul>
+    <p>Neben dem manuellen Tmux-Setup bietet Claude Code auch <strong>eingebaute Subagents</strong>, die automatisch im Hintergrund arbeiten:</p>
+
+    <table class="content-table">
+      <thead>
+        <tr><th>Subagent</th><th>Funktion</th><th>Wann eingesetzt</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Explore Agent</strong></td><td>Durchsucht die Codebase nach relevanten Dateien und Zusammenhängen</td><td>Bei komplexen Fragen über große Projekte</td></tr>
+        <tr><td><strong>Plan Agent</strong></td><td>Erstellt einen detaillierten Umsetzungsplan bevor Code geschrieben wird</td><td>Bei umfangreichen Änderungen</td></tr>
+        <tr><td><strong>Code Review Agent</strong></td><td>Prüft Diffs auf Bugs, Performance und Best Practices</td><td>Vor Commits und PRs</td></tr>
+        <tr><td><strong>General Purpose</strong></td><td>Führt beliebige Aufgaben parallel aus</td><td>Für parallelisierbare Teilaufgaben</td></tr>
+      </tbody>
+    </table>
+
+    <p>Subagents werden automatisch gestartet, wenn Claude Code erkennt, dass eine Aufgabe von Parallelisierung profitiert. Du kannst sie aber auch explizit anfordern.</p>
 
     <h2>Workflows (Multi-Agent Scripts)</h2>
-    <p>Für deterministische Multi-Agent Workflows gibt es <strong>Workflow-Scripts</strong>. Diese orchestrieren mehrere Agents mit klarer Logik:</p>
-    <pre><code>// Beispiel: Review-Workflow
-// 1. Parallel: 3 Reviewer prüfen den Code
-// 2. Ergebnisse zusammenführen
-// 3. Verifizierung der Findings
-phase('Review')
-const findings = await parallel([
-  () => agent('Prüfe auf Bugs'),
-  () => agent('Prüfe Performance'),
-  () => agent('Prüfe Security')
-])
-phase('Verify')
-// ... Adversarial Verification</code></pre>
+    <p>Für wiederkehrende Multi-Agent Setups kannst du Workflows als Scripts definieren. Die drei Kern-Bausteine sind:</p>
 
-    <p>Das ist das "Endgame" &mdash; wer Multi-Agent-Workflows beherrscht, verzehnfacht seine Produktivität.</p>
+    <table class="content-table">
+      <thead>
+        <tr><th>Baustein</th><th>Zweck</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>phase()</code></td><td>Definiert eine benannte Phase im Workflow</td></tr>
+        <tr><td><code>parallel()</code></td><td>Führt mehrere Agenten gleichzeitig aus</td></tr>
+        <tr><td><code>agent()</code></td><td>Startet einen einzelnen Agenten mit einer spezifischen Aufgabe</td></tr>
+      </tbody>
+    </table>
+
+    <pre><code># Beispiel: Website-Erstellung als Multi-Agent Workflow
+
+phase("Design")
+  agent("designer", "Erstelle 3 Layouts für die Homepage")
+
+phase("Implementation")
+  parallel(
+    agent("frontend", "Setze Layout 1 in HTML/CSS um"),
+    agent("content", "Schreibe alle Texte für die Homepage")
+  )
+
+phase("Review")
+  parallel(
+    agent("reviewer", "Prüfe Code auf Qualität und Performance"),
+    agent("qa", "Teste Responsiveness auf allen Breakpoints")
+  )</code></pre>
+
+    <div class="info-box">
+      <p><strong>Hinweis:</strong> Multi-Agent Workflows funktionieren am besten, wenn jeder Agent seinen eigenen Bereich hat und es klare Übergabepunkte gibt. Wenn zwei Agenten dieselbe Datei gleichzeitig bearbeiten, kommt es zu Konflikten.</p>
+    </div>
 
   </article>
 
@@ -155,15 +182,15 @@ phase('Verify')
       <h2>Weiterlesen</h2>
       <div class="articles-grid">
         <a href="eigene-skills-bauen.html" class="article-card">
-          <span class="article-card-tag">Skills</span>
+          <span class="article-card-tag">Advanced</span>
           <h3>Eigene Skills bauen</h3>
-          <p>Workflows automatisieren mit Custom Skills.</p>
+          <p>Workflows als wiederverwendbare Skills automatisieren.</p>
           <div class="article-card-meta"><span>&#128214; 10 Min.</span></div>
         </a>
         <a href="ai-tools-landschaft.html" class="article-card">
           <span class="article-card-tag">Übersicht</span>
           <h3>AI Tool-Landschaft</h3>
-          <p>Alle Tools und Ressourcen im Überblick.</p>
+          <p>Alle Tools die wir nutzen &mdash; und wie sie zusammenspielen.</p>
           <div class="article-card-meta"><span>&#128214; 7 Min.</span></div>
         </a>
       </div>
@@ -191,5 +218,21 @@ phase('Verify')
     </div>
   </footer>
 
+<script>
+document.querySelectorAll("article pre, .tab-panel pre").forEach(pre => {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.innerHTML = "Kopieren";
+  btn.addEventListener("click", () => {
+    const code = pre.querySelector("code") || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.innerHTML = "Kopiert!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = "Kopieren"; btn.classList.remove("copied"); }, 2000);
+    });
+  });
+  pre.appendChild(btn);
+});
+</script>
 </body>
 </html>

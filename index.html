@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heartbeat Knowledge Base</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="style.css">
   <style>
     /* ========== STATS BAR ========== */
@@ -176,6 +177,77 @@
       color: var(--accent);
     }
 
+    /* ========== FEATURE BANNER ========== */
+    .feature-banner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 28px 32px;
+      background: var(--bg-dark);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .feature-banner:hover {
+      box-shadow: 0 0 40px rgba(251, 132, 28, 0.2), 0 8px 32px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+      color: inherit;
+    }
+    .feature-banner-glow {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(251,132,28,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .feature-banner-content {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .feature-banner-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--accent);
+      color: white;
+      border-radius: var(--radius-pill);
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+    .feature-banner h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .feature-banner p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .feature-banner-arrow {
+      font-size: 24px;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    .feature-banner:hover .feature-banner-arrow {
+      transform: translateX(4px);
+    }
+
     /* ========== RESPONSIVE NEW COMPONENTS ========== */
     @media (max-width: 768px) {
       .stats-bar {
@@ -307,7 +379,7 @@
           </div>
           <h3>Skills &amp; Workflows</h3>
           <p>Alle 21 verfügbaren Skills im Überblick &mdash; von Ad-Erstellung bis Design-Systeme.</p>
-          <span class="category-count">21 Skills</span>
+          <span class="category-count">Skills</span>
         </a>
 
         <a href="articles/figma-mcp.html" class="category-card" data-search="figma design mcp plugin api komponenten design system variablen">
@@ -338,6 +410,21 @@
         </a>
 
       </div>
+    </div>
+  </section>
+
+  <!-- TIPPS & TRICKS FEATURE -->
+  <section class="section" style="padding-top: 0; padding-bottom: 48px;">
+    <div class="section-inner">
+      <a href="articles/tipps-und-tricks.html" class="feature-banner" data-search="tipps tricks alias terminal token verbrauch ccusage flux markdown remote control handy asana mcp">
+        <div class="feature-banner-glow"></div>
+        <div class="feature-banner-content">
+          <div class="feature-banner-badge">NEU</div>
+          <h3>Tipps &amp; Tricks für Power User</h3>
+          <p>Terminal-Aliases, Token-Verbrauch tracken, Markdown-Vorschau, Remote Control vom Handy &amp; Asana MCP Setup.</p>
+        </div>
+        <span class="feature-banner-arrow">&rarr;</span>
+      </a>
     </div>
   </section>
 
@@ -402,38 +489,27 @@
         <div class="section-pill">Cheatsheet</div>
         <h2 class="section-title">Quick <em>Commands</em></h2>
       </div>
+      <p style="color: var(--text-secondary); font-size: 14px; text-align: center; margin-bottom: 32px;">Diese Commands stehen dir zur Verfügung, wenn du das <strong>Heartbeat Content Engine</strong> Repo von GitHub geklont und in Claude Code geöffnet hast.</p>
       <div class="commands-grid" id="commandsGrid">
         <div class="command-card" data-search="ad-session ad copy meta linkedin werbetexte">
           <span class="command-name">/ad-session</span>
           <span class="command-desc">Komplette AD Copy für Meta &amp; LinkedIn</span>
         </div>
-        <div class="command-card" data-search="d4y design for you linkedin starter bundle playbook">
-          <span class="command-name">/d4y</span>
-          <span class="command-desc">LinkedIn Starter Bundle generieren</span>
-        </div>
-        <div class="command-card" data-search="logo design branding marke angles templates">
-          <span class="command-name">/logo</span>
-          <span class="command-desc">Logo-Design mit 8 Angle-Templates</span>
-        </div>
-        <div class="command-card" data-search="freebie generator playbook guide lead magnet pdf">
-          <span class="command-name">/freebie-generator</span>
-          <span class="command-desc">Playbooks &amp; Guides erstellen</span>
-        </div>
         <div class="command-card" data-search="creative engine bild generierung ki openrouter orchestrieren">
           <span class="command-name">/creative-engine</span>
           <span class="command-desc">KI-Bildgenerierung orchestrieren</span>
         </div>
-        <div class="command-card" data-search="casinoverluste ads neon poppy casino creatives">
-          <span class="command-name">/casinoverluste-ads</span>
-          <span class="command-desc">5x Ads im NEON-Poppy Stil</span>
+        <div class="command-card" data-search="recruiting ad stellenanzeige creatives homeoffice">
+          <span class="command-name">/recruiting-ad</span>
+          <span class="command-desc">3x Recruiting-Creatives</span>
+        </div>
+        <div class="command-card" data-search="d4y design for you linkedin starter bundle playbook">
+          <span class="command-name">/d4y</span>
+          <span class="command-desc">LinkedIn Starter Bundle generieren</span>
         </div>
         <div class="command-card" data-search="linkedin posts carousels strategie content">
           <span class="command-name">/linkedin</span>
           <span class="command-desc">Posts, Carousels &amp; Strategien</span>
-        </div>
-        <div class="command-card" data-search="recruiting ad stellenanzeige creatives homeoffice">
-          <span class="command-name">/recruiting-ad</span>
-          <span class="command-desc">3x Recruiting-Creatives</span>
         </div>
       </div>
     </div>
@@ -461,6 +537,12 @@
           <span class="item-title">Eigene Skills bauen</span>
           <span class="item-desc">SKILL.md schreiben, Referenzen nutzen, Workflows automatisieren</span>
           <span class="item-meta">10 Min.</span>
+          <span class="item-arrow">&rarr;</span>
+        </a>
+        <a href="articles/tipps-und-tricks.html" class="article-list-item" data-search="tipps tricks alias terminal token verbrauch ccusage flux markdown remote control handy asana">
+          <span class="item-title">Tipps &amp; Tricks für Power User</span>
+          <span class="item-desc">Aliases, Token-Tracking, Flux MD, Remote Control, Asana Setup</span>
+          <span class="item-meta">6 Min.</span>
           <span class="item-arrow">&rarr;</span>
         </a>
         <a href="articles/faq.html" class="article-list-item" data-search="faq häufig gestellte fragen hilfe troubleshooting kosten">
@@ -506,7 +588,7 @@
         <h3>Skills &amp; Workflows</h3>
         <hr class="list-divider">
         <a href="articles/skills-uebersicht.html" class="article-list-item" data-search="skills übersicht alle 21 slash befehle ad-session d4y freebie logo">
-          <span class="item-title">Alle 21 Skills im Überblick</span>
+          <span class="item-title">Alle Skills im Überblick</span>
           <span class="item-desc">Komplette Referenz: Ad-Session, D4Y, Logo, Freebie Generator und mehr</span>
           <span class="item-meta">15 Min.</span>
           <span class="item-arrow">&rarr;</span>
@@ -740,5 +822,21 @@
     });
   </script>
 
+<script>
+document.querySelectorAll("article pre, .tab-panel pre").forEach(pre => {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.innerHTML = "Kopieren";
+  btn.addEventListener("click", () => {
+    const code = pre.querySelector("code") || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.innerHTML = "Kopiert!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = "Kopieren"; btn.classList.remove("copied"); }, 2000);
+    });
+  });
+  pre.appendChild(btn);
+});
+</script>
 </body>
 </html>

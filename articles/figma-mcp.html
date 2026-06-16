@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Figma MCP &mdash; Heartbeat KB</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -45,38 +46,75 @@
 
   <article class="article-content">
 
-    <div class="video-placeholder">
-      <div class="video-play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <span class="video-label">Video: Figma MCP Workflow Demo</span>
+    <h2>Was ist der Figma MCP?</h2>
+    <p>Der Figma MCP ist die Brücke zwischen Code und Design. Er nutzt die offizielle Figma Plugin API und erlaubt Claude Code, direkt in Figma-Dateien zu arbeiten &mdash; Designs auslesen, Nodes erstellen, Komponenten bauen, Variablen setzen.</p>
+
+    <h2>Figma MCP in Claude Code einrichten</h2>
+    <p>Die Einrichtung passiert komplett im Terminal. Beim ersten Zugriff öffnet sich automatisch die Figma-Anmeldung im Browser.</p>
+
+    <div class="info-box">
+      <p><strong>Voraussetzung:</strong> Claude Code muss installiert sein (<a href="claude-code-einrichten.html">Setup-Anleitung</a>). Falls Claude Code gerade läuft, zuerst mit <code>Ctrl+C</code> oder <code>/exit</code> beenden.</p>
     </div>
 
-    <h2>Was kann der Figma MCP?</h2>
-    <p>Der Figma MCP ist die Brücke zwischen Code und Design. Er nutzt die offizielle Figma Plugin API und kann alles tun, was du manuell in Figma machen könntest &mdash; und vieles mehr, weil Claude Code Logik und Automatisierung hinzufügt.</p>
+    <h3>Schritt 1: Figma MCP hinzufügen</h3>
+    <p>Diesen Befehl im Terminal eingeben:</p>
+    <pre><code>claude mcp add --transport http --scope user figma https://mcp.figma.com/mcp</code></pre>
 
-    <h3>Kernfähigkeiten</h3>
+    <h3>Schritt 2: Prüfen</h3>
+    <pre><code>claude mcp list</code></pre>
+    <p>In der Liste sollte <code>figma</code> mit der URL erscheinen.</p>
+
+    <h3>Schritt 3: Claude Code starten und Figma autorisieren</h3>
+    <pre><code>claude</code></pre>
+    <p>Jetzt in Claude Code eine Figma-bezogene Anfrage stellen, z.B.:</p>
+    <pre><code>Zeig mir die Seiten in meiner Figma-Datei:
+https://figma.com/design/deine-file-id/DeineDatei</code></pre>
+    <p><strong>Was passiert:</strong> Beim ersten Mal öffnet sich automatisch ein Browser-Fenster. Dort mit dem Figma Marketing-Account einloggen und den Zugriff bestätigen. Das musst du nur <strong>einmal</strong> machen.</p>
+
+    <h2>Was kann der Figma MCP?</h2>
+
+    <h3>Designs auslesen</h3>
     <ul>
-      <li><strong>Design Context lesen:</strong> Screenshots, Code-Referenz und Metadaten von jedem Node auslesen</li>
-      <li><strong>Nodes erstellen:</strong> Frames, Text, Formen, Auto-Layouts &mdash; alles programmatisch</li>
-      <li><strong>Komponenten bauen:</strong> Component Sets mit Varianten, Properties und Auto-Layout</li>
-      <li><strong>Variablen verwalten:</strong> Collections, Modes (Light/Dark), Token-Hierarchien</li>
-      <li><strong>Text-Styles:</strong> Typography Ramps mit Font-Bindings erstellen</li>
-      <li><strong>Assets verwalten:</strong> Bilder hochladen, Thumbnails exportieren</li>
+      <li><strong>Screenshots:</strong> Jeden Node als Bild exportieren</li>
+      <li><strong>Design Context:</strong> Farben, Fonts, Spacing aus einem Design extrahieren</li>
+      <li><strong>Metadaten:</strong> Komponentenstruktur, Variablen, Hierarchie auslesen</li>
+    </ul>
+    <p>Beispiel: Gib Claude Code einfach eine Figma-URL und sage "Implementiere dieses Design als HTML".</p>
+
+    <h3>Nodes erstellen &amp; bearbeiten</h3>
+    <ul>
+      <li><strong>Frames, Text, Formen:</strong> Alles programmatisch erstellen</li>
+      <li><strong>Auto-Layouts:</strong> Intelligentes Spacing und Sizing</li>
+      <li><strong>Fills, Strokes, Effects:</strong> Farben, Rahmen, Schatten setzen</li>
+      <li><strong>Bilder einfügen:</strong> Assets hochladen und platzieren</li>
+    </ul>
+
+    <h3>Komponenten bauen</h3>
+    <ul>
+      <li><strong>Component Sets:</strong> Varianten mit Properties erstellen</li>
+      <li><strong>Auto-Layout:</strong> Responsive Komponenten die sich anpassen</li>
+      <li><strong>Instanzen:</strong> Komponenten wiederverwenden und überschreiben</li>
+    </ul>
+
+    <h3>Variablen &amp; Design Tokens</h3>
+    <ul>
+      <li><strong>Collections:</strong> Variablen-Sammlungen mit Modes (Light/Dark)</li>
+      <li><strong>3-Tier Hierarchie:</strong> Primitives &rarr; Semantic &rarr; Component-Level</li>
+      <li><strong>Bindings:</strong> Variablen an Node-Properties binden</li>
     </ul>
 
     <h2>Typische Workflows</h2>
 
     <h3>1. Design-to-Code</h3>
     <p>Du gibst Claude Code eine Figma-URL und er extrahiert die Design-Informationen:</p>
-    <pre><code>"Implementiere dieses Design aus Figma:
-https://figma.com/design/abc123/MeinDesign?node-id=1-2"</code></pre>
+    <pre><code>Implementiere dieses Design aus Figma:
+https://figma.com/design/abc123/MeinDesign?node-id=1-2</code></pre>
     <p>Claude Code liest den Node aus, analysiert Farben, Fonts, Spacing und generiert den passenden HTML/CSS-Code.</p>
 
     <h3>2. Code-to-Design (Figma Capture)</h3>
-    <p>Umgekehrt kann Claude Code auch HTML-Seiten zurück nach Figma pushen. Das wird z.B. beim Freebie Generator genutzt:</p>
+    <p>Umgekehrt kann Claude Code auch HTML-Seiten zurück nach Figma pushen:</p>
     <ol>
-      <li>Freebie wird als HTML generiert (595&times;842px)</li>
+      <li>Freebie/Seite wird als HTML generiert (z.B. 595&times;842px)</li>
       <li>Chrome Headless rendert die Seite</li>
       <li>Das Ergebnis wird via Plugin API in Figma eingefügt</li>
       <li>Gradient-Fills und Variablen werden nachträglich angewendet</li>
@@ -85,27 +123,19 @@ https://figma.com/design/abc123/MeinDesign?node-id=1-2"</code></pre>
     <h3>3. Design System erstellen</h3>
     <p>Mit dem <code>/generate-design-system</code> Skill kann Claude Code ein komplettes Design System in Figma aufbauen:</p>
     <ul>
-      <li><strong>3-Tier Variablen:</strong> Primitives &rarr; Semantic &rarr; Component-Level</li>
-      <li><strong>Light/Dark Modes</strong> mit spezifischen Scopes</li>
-      <li><strong>Typography Ramp:</strong> Display, H1&ndash;H4, Body, Caption, Overline</li>
-      <li><strong>Spacing Scale:</strong> 0, 1, 2, 4, 8, 12, 16, 20, 24, 32, 48, 64</li>
+      <li><strong>Variablen:</strong> 3-Tier Hierarchie (Primitives &rarr; Semantic &rarr; Component)</li>
+      <li><strong>Light/Dark Modes:</strong> Mit spezifischen Scopes</li>
+      <li><strong>Typography:</strong> Display, H1&ndash;H4, Body, Caption, Overline</li>
+      <li><strong>Spacing:</strong> 0, 1, 2, 4, 8, 12, 16, 20, 24, 32, 48, 64</li>
       <li><strong>Komponenten:</strong> Buttons, Cards, Inputs mit Varianten</li>
     </ul>
-
-    <div class="info-box">
-      <p><strong>Wichtig:</strong> Die Figma API kann nur Cloud-Fonts laden. Lokale Fonts wie Helvetica Now Display funktionieren nicht &mdash; verwende stattdessen Google Fonts oder Adobe Fonts die in der Figma Cloud verfügbar sind.</p>
-    </div>
 
     <h2>Wichtige Konzepte</h2>
 
     <h3>Inkrementelles Arbeiten</h3>
-    <p>Der Figma MCP arbeitet inkrementell &mdash; komplexe Layouts werden Schritt für Schritt aufgebaut. Jeder Schritt wird validiert bevor der nächste startet. Das verhindert Fehler und macht den Prozess nachvollziehbar.</p>
-
-    <h3>Auto-Layout</h3>
-    <p>Figma's Auto-Layout ist das zentrale Layout-System. Claude Code nutzt es standardmäßig für alle Container mit strukturell verbundenen Kindern. Das bedeutet: Kein manuelles Positionieren mit x/y-Koordinaten, sondern intelligentes Spacing und Sizing.</p>
+    <p>Der Figma MCP arbeitet Schritt für Schritt &mdash; komplexe Layouts werden inkrementell aufgebaut, jeder Schritt wird validiert. Das verhindert Fehler bei großen Designs.</p>
 
     <h3>Variablen-Hierarchie</h3>
-    <p>Best Practice ist eine 3-stufige Hierarchie:</p>
     <table class="content-table">
       <thead>
         <tr>
@@ -133,35 +163,11 @@ https://figma.com/design/abc123/MeinDesign?node-id=1-2"</code></pre>
       </tbody>
     </table>
 
-    <h2>Verbindung einrichten</h2>
-    <p>Der Figma MCP wird über das offizielle Figma Plugin verbunden. Die Authentifizierung läuft über OAuth direkt in Claude Web:</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-content">
-          <h4>Figma-Account verbinden</h4>
-          <p>Gehe zu Claude Web (claude.ai) und verbinde deinen Figma-Account über die Integrationen-Seite.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-content">
-          <h4>Figma-Datei öffnen</h4>
-          <p>Öffne die Figma-Datei, mit der du arbeiten willst, und kopiere die URL.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-content">
-          <h4>URL an Claude Code geben</h4>
-          <p>Gib die URL in Claude Code ein mit einer Anweisung wie "Lies dieses Design" oder "Erstelle dort ein neues Frame".</p>
-        </div>
-      </div>
-    </div>
-
     <h2>Bekannte Einschränkungen</h2>
     <ul>
-      <li>Nur Cloud-Fonts werden unterstützt (keine lokalen Fonts)</li>
-      <li>Maximale Script-Komplexität: ~10 logische Operationen pro Aufruf</li>
-      <li>Seiten müssen einzeln geladen werden (kein Multi-Page in einem Aufruf)</li>
-      <li><code>figma.notify()</code> funktioniert nicht im MCP-Kontext</li>
+      <li><strong>Nur Cloud-Fonts:</strong> Lokale Fonts wie Helvetica Now Display funktionieren nicht über die API. Nur Google Fonts und Adobe Fonts die in der Figma Cloud verfügbar sind.</li>
+      <li><strong>Max. 10 Operationen pro Aufruf:</strong> Komplexe Layouts werden in mehrere Schritte aufgeteilt.</li>
+      <li><strong>Seiten einzeln laden:</strong> Jede Seite muss separat gewechselt werden.</li>
     </ul>
 
   </article>
@@ -209,6 +215,23 @@ https://figma.com/design/abc123/MeinDesign?node-id=1-2"</code></pre>
       <span>Powered by Claude Code</span>
     </div>
   </footer>
+
+<script>
+document.querySelectorAll("article pre, .tab-panel pre").forEach(pre => {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.innerHTML = "Kopieren";
+  btn.addEventListener("click", () => {
+    const code = pre.querySelector("code") || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.innerHTML = "Kopiert!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = "Kopieren"; btn.classList.remove("copied"); }, 2000);
+    });
+  });
+  pre.appendChild(btn);
+});
+</script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEO &amp; Blog Pipeline &mdash; Heartbeat KB</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -44,84 +45,7 @@
   </section>
 
   <article class="article-content">
-
-    <div class="video-placeholder">
-      <div class="video-play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <span class="video-label">Video: Von Null zum automatisierten Blog</span>
-    </div>
-
-    <h2>Warum eine automatisierte Blog-Pipeline?</h2>
-    <p>Organischer Traffic ist der wertvollste Traffic &mdash; aber regelmäßig hochwertigen SEO-Content zu produzieren kostet Zeit. Die Idee hinter der SEO &amp; Blog Pipeline: Claude Code übernimmt den gesamten Workflow von der Keyword-Recherche bis zum fertigen, optimierten Blogpost. Du behältst die redaktionelle Kontrolle, während die Maschine die Fleißarbeit erledigt.</p>
-
-    <h2>Die Architektur: Astro + Storyblok</h2>
-    <p>Das technische Fundament der Pipeline besteht aus zwei Bausteinen:</p>
-    <ul>
-      <li><strong>Astro</strong> &mdash; ein modernes Static-Site-Framework, das blitzschnelle Websites generiert. Perfekt für Blogs, weil jede Seite als statisches HTML ausgeliefert wird. Kein JavaScript-Overhead, maximale Core Web Vitals.</li>
-      <li><strong>Storyblok</strong> &mdash; ein Headless CMS, das als Content-Hub dient. Redakteure (oder Claude Code) pflegen Inhalte über die API ein, Astro baut daraus fertige Seiten.</li>
-    </ul>
-
-    <div class="info-box">
-      <p><strong>Warum Astro statt WordPress?</strong> Astro liefert statisches HTML ohne Datenbank-Abfragen. Das bedeutet: schnellere Ladezeiten, bessere SEO-Scores, weniger Sicherheitsrisiken und nahezu keine Hosting-Kosten. Für content-lastige Seiten mit Blog ist Astro aktuell die beste Wahl.</p>
-    </div>
-
-    <h2>Astro vs. Onepage: Wann was?</h2>
-    <p>Nicht jedes Projekt braucht eine vollständige Astro-Installation. Die Faustregel:</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Kriterium</th>
-          <th>Astro + CMS</th>
-          <th>Onepage (z.B. OnePage.io)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Blog / Magazin</td>
-          <td>&#10003; Ideal</td>
-          <td>&#10007; Nicht geeignet</td>
-        </tr>
-        <tr>
-          <td>SEO-kritische Seiten</td>
-          <td>&#10003; Volle Kontrolle</td>
-          <td>&#9711; Eingeschränkt</td>
-        </tr>
-        <tr>
-          <td>Einfache Landingpage</td>
-          <td>&#9711; Overkill</td>
-          <td>&#10003; Perfekt</td>
-        </tr>
-        <tr>
-          <td>Mehrere Unterseiten</td>
-          <td>&#10003; Skaliert beliebig</td>
-          <td>&#10007; Nur Single Page</td>
-        </tr>
-        <tr>
-          <td>Setup-Aufwand</td>
-          <td>Mittel (Repo + Deploy)</td>
-          <td>Gering (Drag &amp; Drop)</td>
-        </tr>
-        <tr>
-          <td>Laufende Kosten</td>
-          <td>Minimal (Vercel/Netlify)</td>
-          <td>Monatliches Abo</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p><strong>Kurz gesagt:</strong> Wenn du regelmäßig Inhalte publizieren willst und SEO wichtig ist &mdash; nimm Astro. Für eine schnelle Landingpage ohne Blog reicht Onepage völlig aus.</p>
-
-    <h2>Der Pipeline-Workflow in 5 Schritten</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-content">
-          <h4>1. CMS Setup</h4>
-          <p>Storyblok-Space anlegen, Content-Typen definieren (Blogpost, Autor, Kategorie) und die Astro-Integration konfigurieren. Claude Code kann das initiale Astro-Projekt scaffolden und die Storyblok-Bridge einrichten.</p>
-        </div>
-      </div>
-      <div class="step">
+<div class="step">
         <div class="step-content">
           <h4>2. Content-Generierung</h4>
           <p>Aus einer Keyword-Liste generiert Claude Code vollständige Blogposts: Titel, Meta-Description, Struktur mit H2/H3, Fließtext, interne Verlinkung und Call-to-Actions. Jeder Post wird als Draft in Storyblok angelegt.</p>
@@ -235,5 +159,21 @@
     </div>
   </footer>
 
+<script>
+document.querySelectorAll("article pre, .tab-panel pre").forEach(pre => {
+  const btn = document.createElement("button");
+  btn.className = "copy-btn";
+  btn.innerHTML = "Kopieren";
+  btn.addEventListener("click", () => {
+    const code = pre.querySelector("code") || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.innerHTML = "Kopiert!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = "Kopieren"; btn.classList.remove("copied"); }, 2000);
+    });
+  });
+  pre.appendChild(btn);
+});
+</script>
 </body>
 </html>
