@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossar &amp; Abkürzungen &mdash; Heartbeat KB</title>
+  <meta name="description" content="Alle wichtigen Begriffe aus unserer AI-Sprache einfach erklärt: MCP, Skill, Markdown, Repo, Commit, Push, Localhost und mehr.">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ========== GLOSSARY ========== */
+    .glossary-search {
+      max-width: 580px;
+      margin: 28px auto 0;
+    }
+
+    /* Quick-Jump Chips */
+    .term-jump {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .term-jump a {
+      padding: 6px 14px;
+      background: rgba(251, 132, 28, 0.12);
+      border: 1px solid rgba(251, 132, 28, 0.25);
+      border-radius: var(--radius-pill);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.3px;
+      transition: all 0.2s;
+    }
+    .term-jump a:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Term Groups */
+    .term-group { margin-bottom: 48px; scroll-margin-top: 96px; }
+    .term-group-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .term-group-head h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .term-group-head .count {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .term-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+
+    .term-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      transition: all 0.2s;
+    }
+    .term-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+    .term-card .term {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+      margin-bottom: 2px;
+    }
+    .term-card .term code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .term-card .term-aka {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 8px;
+    }
+    .term-card p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .term-card p strong { color: var(--text-primary); font-weight: 600; }
+
+    .no-results {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 15px;
+      padding: 48px 0;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .term-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3JEYZELMGQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3JEYZELMGQ');
+  </script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+        <li><a href="mcp-integrationen.html">MCPs</a></li>
+        <li><a href="skills-uebersicht.html">Skills</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="glossar.html" class="active">Glossar</a></li>
+      </ul>
+      <a href="claude-code-einrichten.html" class="nav-cta">Jetzt starten &rarr;</a>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-hero-inner" style="max-width: 880px;">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">/</span>
+        <span class="current">Glossar</span>
+      </div>
+      <h1>Glossar &mdash; unsere <em>AI-Sprache</em> einfach erklärt</h1>
+      <div class="article-meta">
+        <span class="tag">Cheat Sheet</span>
+        <span>&#128214; Zum Nachschlagen</span>
+        <span>Aktualisiert: Juni 2026</span>
+      </div>
+
+      <!-- Live-Suche -->
+      <div class="search-wrapper glossary-search">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="termSearch" placeholder="Begriff suchen ... z.B. MCP, Markdown, Push">
+      </div>
+
+      <!-- Quick-Jump -->
+      <div class="term-jump">
+        <a href="#claude-code">Claude Code</a>
+        <a href="#github">GitHub &amp; Zusammenarbeit</a>
+        <a href="#web">Web &amp; Technik</a>
+        <a href="#tools">Tools &amp; Sonstiges</a>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-content" style="max-width: 880px;">
+
+    <div class="info-box">
+      <p><strong>Wichtigster Tipp:</strong> Du musst dir nichts davon merken. Wenn ein Wort unklar ist, frag im Zweifel einfach Claude direkt &mdash; z.B. <code>Was ist eine .md-Datei?</code> oder <code>Erklär mir was "pushen" bedeutet</code>. Claude erklärt dir alles auf deinem Wissensstand. Dieses Glossar ist nur zum schnellen Nachschlagen da.</p>
+    </div>
+
+    <!-- ============ CLAUDE CODE ============ -->
+    <section class="term-group" id="claude-code">
+      <div class="term-group-head">
+        <h2>Claude Code &amp; Grundlagen</h2>
+        <span class="count">16 Begriffe</span>
+      </div>
+      <div class="term-grid">
+
+        <div class="term-card" data-search="claude code cloud code terminal assistent ki">
+          <div class="term">Claude Code</div>
+          <p>Der KI-Assistent, der im Terminal oder in der App läuft, Code schreibt, Dateien bearbeitet und Tools steuert. („Cloud Code" ist nur ein Transkriptions-Hörfehler &mdash; gemeint ist immer <strong>Claude</strong>.)</p>
+        </div>
+
+        <div class="term-card" data-search="prompt prompten anweisung befehl eingabe">
+          <div class="term">Prompt / prompten</div>
+          <p>Die Anweisung, die du Claude in Textform gibst. <strong>Prompten</strong> heißt: Claude per Text beauftragen. Je klarer der Prompt, desto besser das Ergebnis.</p>
+        </div>
+
+        <div class="term-card" data-search="skill skills slash command workflow d4y ad-session">
+          <div class="term">Skill</div>
+          <p>Ein vorgefertigter Workflow, den du mit Schrägstrich startest, z.B. <code>/d4y</code> oder <code>/ad-session</code>. Wie eine gespeicherte Arbeitsanleitung, die Claude Schritt für Schritt abarbeitet.</p>
+        </div>
+
+        <div class="term-card" data-search="mcp model context protocol integration figma asana drive higgsfield">
+          <div class="term">MCP</div>
+          <span class="term-aka">Model Context Protocol</span>
+          <p>Die Schnittstelle, die Claude mit externen Tools verbindet &mdash; Figma, Asana, Google Drive, Higgsfield, Close CRM usw. Über MCPs kann Claude diese Programme direkt bedienen.</p>
+        </div>
+
+        <div class="term-card" data-search="md markdown datei text formatierung hashtag">
+          <div class="term">.md / Markdown</div>
+          <p>Eine einfache Textdatei mit leichter Formatierung (<code>#</code> = Überschrift, <code>**fett**</code>). KI kann sie perfekt lesen &amp; schreiben &mdash; deshalb arbeiten wir mit Markdown statt mit Google Docs.</p>
+        </div>
+
+        <div class="term-card" data-search="claude.md rules regeln guard rails architektur">
+          <div class="term">CLAUDE.md / Rules</div>
+          <p>Die Regel-Datei in einem Projekt, die Claude sagt, wie er sich verhalten soll (Architektur, Sprache, Styling). Wie „Leitplanken", damit nichts schiefgeht.</p>
+        </div>
+
+        <div class="term-card" data-search="memory memories gespeichert fakten erinnerung">
+          <div class="term">Memory / Memories</div>
+          <p>Gespeicherte Fakten, die Claude über mehrere Sessions hinweg behält &mdash; z.B. Vorlieben, Kunden-Infos oder wiederkehrende Regeln.</p>
+        </div>
+
+        <div class="term-card" data-search="context window kontext fenster vergessen länge">
+          <div class="term">Context Window / Kontext</div>
+          <p>Wie viel Claude gleichzeitig „im Kopf" behalten kann. Wird ein Chat sehr lang, fällt Älteres hinten raus &mdash; dann lieber neuen Chat starten.</p>
+        </div>
+
+        <div class="term-card" data-search="token tokens kosten recheneinheit verbrauch">
+          <div class="term">Token</div>
+          <p>Die Recheneinheit für Text (grob: Wortteile). Bestimmt sowohl die Kosten als auch, wie viel in den Kontext passt.</p>
+        </div>
+
+        <div class="term-card" data-search="plan modus mode planen feature">
+          <div class="term">Plan-Modus</div>
+          <p>Claude plant erst und baut nicht sofort. Ideal für größere Features oder Webseiten, die du vorher gemeinsam durchdenken willst.</p>
+        </div>
+
+        <div class="term-card" data-search="auto modus dangerously skip permissions automatisch">
+          <div class="term">Auto-Modus</div>
+          <span class="term-aka">„dangerously skip permissions"</span>
+          <p>Claude darf handeln, ohne bei jedem Schritt nachzufragen. Schneller, wenn du dem Ablauf vertraust.</p>
+        </div>
+
+        <div class="term-card" data-search="permissions erlauben berechtigung rückfrage akzeptieren">
+          <div class="term">Permissions</div>
+          <p>Die Erlaubnis-Abfragen, bevor Claude etwas ausführt (Datei ändern, Befehl starten). Am Anfang gut, um zu sehen, was passiert.</p>
+        </div>
+
+        <div class="term-card" data-search="opus sonnet haiku fable modell model version 4.8">
+          <div class="term">Opus / Sonnet / Haiku / Fable</div>
+          <p>Die verschiedenen Claude-Modelle. <strong>Opus</strong> = das stärkste. Höhere Zahl = neuer (z.B. Opus 4.8 ist besser als 4.6).</p>
+        </div>
+
+        <div class="term-card" data-search="claude design cloud design slides webseite freebie browser">
+          <div class="term">Claude Design</div>
+          <span class="term-aka">im Meeting „Cloud Design"</span>
+          <p>Claudes Design-Tool im Browser. Baut aus einem Prompt richtig gute Slides, Webseiten oder Freebies &mdash; Logo &amp; Texte einfach mitgeben.</p>
+        </div>
+
+        <div class="term-card" data-search="terminal kommandozeile schwarzes fenster befehle">
+          <div class="term">Terminal</div>
+          <p>Das schwarze Eingabefenster, in dem man Befehle tippt &mdash; und Claude Code startet (mit Pfeiltaste nach oben holst du den letzten Befehl zurück).</p>
+        </div>
+
+        <div class="term-card" data-search="cowork code app oberfläche claude">
+          <div class="term">Code / Cowork (App)</div>
+          <p>Zwei Claude-Oberflächen. <strong>Code</strong> ist nah am Terminal (gut für Webseiten), <strong>Cowork</strong> ist einfacher (gut für Skills) &mdash; für viele Aufgaben austauschbar.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ GITHUB ============ -->
+    <section class="term-group" id="github">
+      <div class="term-group-head">
+        <h2>GitHub &amp; Zusammenarbeit</h2>
+        <span class="count">9 Begriffe</span>
+      </div>
+      <div class="term-grid">
+
+        <div class="term-card" data-search="github plattform code speichern versionierung zusammenarbeit">
+          <div class="term">GitHub</div>
+          <p>Plattform zum Speichern, Versionieren und gemeinsamen Bearbeiten von Code. Salopp: „wie Google Drive, nur besser für KI." Nie verlierst du deinen Stand.</p>
+        </div>
+
+        <div class="term-card" data-search="repo repository ordner projekt">
+          <div class="term">Repo / Repository</div>
+          <p>Ein Projekt-Ordner auf GitHub. Enthält den ganzen Code eines Projekts (z.B. eine Webseite samt Skills und Regeln).</p>
+        </div>
+
+        <div class="term-card" data-search="clone klonen kopieren herunterladen lokal">
+          <div class="term">clone / klonen</div>
+          <p>Ein Repo als Kopie auf deinen eigenen Computer holen, um daran zu arbeiten.</p>
+        </div>
+
+        <div class="term-card" data-search="commit committen speichern lokal snapshot zwischenstand">
+          <div class="term">commit / committen</div>
+          <p>Einen Zwischenstand <strong>lokal</strong> auf deinem Computer speichern &mdash; wie ein Schnappschuss, zu dem du jederzeit zurück kannst.</p>
+        </div>
+
+        <div class="term-card" data-search="push pushen hochladen veröffentlichen teilen">
+          <div class="term">push / pushen</div>
+          <p>Deine lokalen Commits zu GitHub <strong>hochladen</strong>, damit alle anderen sie sehen. Faustregel am Anfang: committen ja, pushen erst, wenn du sicher bist.</p>
+        </div>
+
+        <div class="term-card" data-search="pull pullen reinholen aktualisieren neueste änderungen">
+          <div class="term">pull / pullen</div>
+          <p>Die neuesten Änderungen von GitHub zu dir <strong>herunterholen</strong> &mdash; so bekommst du den aktuellen Stand der Kollegen.</p>
+        </div>
+
+        <div class="term-card" data-search="merge mergen zusammenführen vereinen stände">
+          <div class="term">merge / mergen</div>
+          <p>Verschiedene Arbeitsstände wieder zusammenführen &mdash; auch wenn mehrere Leute parallel gearbeitet haben, ohne sich gegenseitig zu überschreiben.</p>
+        </div>
+
+        <div class="term-card" data-search="branch branche arbeitsstrang separat zweig">
+          <div class="term">Branch</div>
+          <p>Ein separater Arbeitsstrang („Zweig"), in dem du etwas ausprobieren kannst, ohne den Hauptstand zu stören. Später wird er gemerged.</p>
+        </div>
+
+        <div class="term-card" data-search="github cli gh kommandozeile authentifizierung verbinden">
+          <div class="term"><code>gh</code> / GitHub CLI</div>
+          <p>Das Kommandozeilen-Tool, mit dem Terminal &amp; Claude sich mit GitHub verbinden. Einmal authentifizieren &mdash; danach bist du dauerhaft eingeloggt.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ WEB & TECHNIK ============ -->
+    <section class="term-group" id="web">
+      <div class="term-group-head">
+        <h2>Web &amp; Technik</h2>
+        <span class="count">11 Begriffe</span>
+      </div>
+      <div class="term-grid">
+
+        <div class="term-card" data-search="localhost lokal vorschau server computer">
+          <div class="term">Localhost</div>
+          <p>Eine Vorschau-Webseite, die <strong>nur auf deinem Computer</strong> läuft. Niemand sonst hat Zugriff &mdash; ein Localhost-Link lässt sich nicht teilen.</p>
+        </div>
+
+        <div class="term-card" data-search="domain adresse url webadresse online">
+          <div class="term">Domain</div>
+          <p>Die öffentliche Web-Adresse einer Seite (z.B. <code>beispiel.com</code>). Erst mit Domain ist eine Seite für andere im Internet erreichbar.</p>
+        </div>
+
+        <div class="term-card" data-search="dev server development entwicklung live test astro dev">
+          <div class="term">Dev-Server / „Dev"</div>
+          <p>Der lokale Entwicklungsmodus, der deine Seite zum Testen live anzeigt (z.B. via <code>astro dev</code>). Änderungen erscheinen sofort.</p>
+        </div>
+
+        <div class="term-card" data-search="astro framework webseite blog seo aufbau">
+          <div class="term">Astro</div>
+          <p>Das Web-Framework, mit dem unsere Webseiten und Blogs gebaut sind &mdash; schnell und gut für SEO.</p>
+        </div>
+
+        <div class="term-card" data-search="vs code editor visual studio entwickler übersicht">
+          <div class="term">VS Code</div>
+          <p>Der weltweit verbreitetste Code-Editor. Gibt dir eine gute Oberfläche, um Dateien, Commits und Stände im Blick zu behalten.</p>
+        </div>
+
+        <div class="term-card" data-search="api schnittstelle request daten youtube spotify abfragen">
+          <div class="term">API</div>
+          <p>Eine Schnittstelle, über die Programme Daten austauschen &mdash; z.B. um Daten von YouTube oder Spotify automatisch abzufragen.</p>
+        </div>
+
+        <div class="term-card" data-search="json datenformat struktur prompt daten">
+          <div class="term">JSON</div>
+          <p>Ein strukturiertes Datenformat. Wird für Daten und manchmal für komplexe, lange Prompts verwendet.</p>
+        </div>
+
+        <div class="term-card" data-search="frontend oberfläche sichtbar design ui">
+          <div class="term">Frontend</div>
+          <p>Der sichtbare Teil einer Webseite &mdash; alles, was der Nutzer im Browser sieht (Design, Buttons, Texte).</p>
+        </div>
+
+        <div class="term-card" data-search="seo suchmaschine google ranking optimierung keywords">
+          <div class="term">SEO</div>
+          <p>Suchmaschinen-Optimierung. Sorgt dafür, dass Google &amp; KIs uns gut finden &mdash; über sinnvolle Struktur, Unterseiten und Keywords.</p>
+        </div>
+
+        <div class="term-card" data-search="scrapen scraping daten sammeln webseite trustpilot">
+          <div class="term">scrapen</div>
+          <p>Daten automatisch von einer Webseite einsammeln (z.B. Bewertungen), um sie weiterzuverarbeiten.</p>
+        </div>
+
+        <div class="term-card" data-search="pipeline ablauf automatisiert schritte prozess">
+          <div class="term">Pipeline</div>
+          <p>Eine automatisierte Abfolge von Schritten, die nacheinander laufen &mdash; z.B. Daten sammeln &rarr; aufbereiten &rarr; einbauen.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TOOLS ============ -->
+    <section class="term-group" id="tools">
+      <div class="term-group-head">
+        <h2>Tools &amp; Sonstiges</h2>
+        <span class="count">6 Begriffe</span>
+      </div>
+      <div class="term-grid">
+
+        <div class="term-card" data-search="transkribierungstool whisper flow super whisper wispr stimme spracheingabe diktieren">
+          <div class="term">Transkribierungstool</div>
+          <span class="term-aka">Wispr Flow / Super Whisper</span>
+          <p>Wandelt deine gesprochene Stimme in Text um. Macht das Prompten viel schneller &mdash; einfach reden statt tippen. Im Alltag fast unverzichtbar.</p>
+        </div>
+
+        <div class="term-card" data-search="figma design tool mcp komponenten">
+          <div class="term">Figma</div>
+          <p>Das Design-Tool für Layouts und Komponenten. Per MCP mit Claude verbunden, sodass Designs direkt erstellt/bearbeitet werden können.</p>
+        </div>
+
+        <div class="term-card" data-search="higgsfield ki bild video generierung gpt image">
+          <div class="term">Higgsfield</div>
+          <p>KI-Tool für Bild- und Video-Generierung (per MCP angebunden). Damit entstehen z.B. Ad-Creatives und Marketing-Videos.</p>
+        </div>
+
+        <div class="term-card" data-search="ffmpeg fmp video audio schneiden konvertieren clips">
+          <div class="term">ffmpeg</div>
+          <p>Ein Kommandozeilen-Tool zum Schneiden und Konvertieren von Video &amp; Audio &mdash; z.B. um Podcast-Clips automatisch herauszuschneiden.</p>
+        </div>
+
+        <div class="term-card" data-search="knowledge base wissen sammlung dokumentation diese seite">
+          <div class="term">Knowledge Base</div>
+          <p>Diese Sammlung hier &mdash; die zentrale Wissens-Seite mit Anleitungen, MCPs, Skills und diesem Glossar.</p>
+        </div>
+
+        <div class="term-card" data-search="ramp up rampup einarbeitung hochfahren onboarding lernen">
+          <div class="term">Ramp-up</div>
+          <p>Die Einarbeitungs- bzw. Hochfahr-Phase auf ein neues Thema oder Tool.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <p class="no-results" id="noResults">Kein Begriff gefunden. Frag im Zweifel einfach Claude direkt &mdash; er erklärt dir alles. &#128075;</p>
+
+  </article>
+
+  <section class="related-section">
+    <div class="related-inner">
+      <h2>Weiterlesen</h2>
+      <div class="articles-grid">
+        <a href="claude-code-einrichten.html" class="article-card">
+          <span class="article-card-tag">Erste Schritte</span>
+          <h3>Claude Code im Terminal einrichten</h3>
+          <p>Installation, Setup, erste Befehle und CLAUDE.md verstehen.</p>
+          <div class="article-card-meta"><span>&#128214; 8 Min.</span></div>
+        </a>
+        <a href="mcp-integrationen.html" class="article-card">
+          <span class="article-card-tag">Übersicht</span>
+          <h3>Alle MCP-Integrationen</h3>
+          <p>Figma, Asana, Google Drive, Higgsfield und mehr verbinden.</p>
+          <div class="article-card-meta"><span>&#128214; 6 Min.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
+        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Kategorien</h4><ul>
+          <li><a href="claude-code-einrichten.html">Erste Schritte</a></li>
+          <li><a href="mcp-integrationen.html">MCP-Integrationen</a></li>
+          <li><a href="skills-uebersicht.html">Skills</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="glossar.html">Glossar</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Heartbeat Consulting</span>
+      <span>Powered by Claude Code</span>
+    </div>
+  </footer>
+
+  <script>
+    // Live-Filter für Glossar-Begriffe
+    const termSearch = document.getElementById('termSearch');
+    const termCards = document.querySelectorAll('.term-card');
+    const termGroups = document.querySelectorAll('.term-group');
+    const noResults = document.getElementById('noResults');
+
+    termSearch.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      let total = 0;
+      termCards.forEach(card => {
+        const text = card.dataset.search + ' ' + card.textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) total++;
+      });
+      // Leere Gruppen ausblenden
+      termGroups.forEach(group => {
+        const visible = group.querySelectorAll('.term-card:not([style*="display: none"])');
+        group.style.display = (!q || visible.length > 0) ? '' : 'none';
+      });
+      noResults.style.display = (q && total === 0) ? 'block' : 'none';
+    });
+  </script>
+
+</body>
+</html>
