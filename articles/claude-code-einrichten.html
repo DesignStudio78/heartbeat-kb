@@ -45,8 +45,8 @@
       <h1>Claude Code im Terminal <em>einrichten</em></h1>
       <div class="article-meta">
         <span class="tag">Beginner</span>
-        <span>&#128214; 12 Min. Lesezeit</span>
-        <span>Aktualisiert: Juni 2026</span>
+        <span>&#128214; 10 Min. Lesezeit</span>
+        <span>Aktualisiert: August 2026</span>
       </div>
     </div>
   </section>
@@ -57,158 +57,133 @@
       <source src="../assets/Claude Code im Terminal einrichten.mp4" type="video/mp4">
     </video>
 
-    <h2>Was wird installiert?</h2>
-    <p>Claude Code ist Anthropics KI-Assistent für das Terminal. Er kann Dateien lesen und schreiben, Bilder generieren, im Web suchen und mit verschiedenen Diensten interagieren. Für die Einrichtung werden drei Dinge installiert:</p>
-    <ul>
-      <li><strong>Homebrew</strong> &mdash; Paketmanager für macOS (installiert alles Weitere)</li>
-      <li><strong>Node.js</strong> &mdash; JavaScript-Runtime (wird von Claude Code benötigt)</li>
-      <li><strong>Claude Code</strong> &mdash; Der KI-Assistent selbst</li>
-    </ul>
+    <h2>Was ist Claude Code?</h2>
+    <p>Claude Code ist Anthropics KI-Assistent für das Terminal. Er kann Dateien lesen und schreiben, Bilder und Videos generieren, im Web recherchieren und &uuml;ber MCP-Server mit externen Diensten (Figma, Google Drive, Slack, Higgsfield &hellip;) arbeiten. Diese Anleitung bringt dich in wenigen Minuten von null auf einen fertig eingerichteten Claude Code.</p>
+
+    <div class="info-box">
+      <p><strong>Neu seit 2026:</strong> Claude Code hat einen eigenen <strong>nativen Installer</strong>. Der braucht <em>weder Homebrew noch Node.js</em> und h&auml;lt sich selbst automatisch aktuell. Das ist der schnellste und stabilste Weg &mdash; nimm ihn, wenn du keinen speziellen Grund f&uuml;r etwas anderes hast.</p>
+    </div>
 
     <h3>Voraussetzungen</h3>
     <ul>
-      <li>MacBook mit macOS 15 (Sequoia) oder neuer</li>
+      <li>Mac mit macOS 15 (Sequoia) oder neuer</li>
       <li>Internetzugang</li>
-      <li>Admin-Rechte (eigenes Benutzerkonto)</li>
+      <li>Eigenes Benutzerkonto (Admin-Rechte)</li>
       <li>Anthropic-Account (claude.ai) mit aktivem Abo (Max, Pro oder Team)</li>
     </ul>
 
-    <div class="info-box">
-      <p><strong>Alle Schritte werden im selben Terminal-Fenster durchgeführt.</strong> Du musst zwischendurch KEIN neues Terminal öffnen. Einfach einen Befehl nach dem anderen eingeben.</p>
-    </div>
+    <h3>Terminal &ouml;ffnen</h3>
+    <p>Finder &rarr; Programme &rarr; Dienstprogramme &rarr; <strong>Terminal</strong>. Alle Code-Bl&ouml;cke in dieser Anleitung sind Befehle, die du dort einf&uuml;gst &mdash; einen nach dem anderen, jeweils mit Enter.</p>
 
-    <h3>Terminal öffnen</h3>
-    <p>Finder &rarr; Programme &rarr; Dienstprogramme &rarr; <strong>Terminal</strong>. Dieses Fenster bleibt während der gesamten Einrichtung offen. Alle Code-Blöcke in dieser Anleitung sind Befehle, die du dort einfügst.</p>
-
-    <h2>1. Homebrew installieren</h2>
-    <p>Diesen Befehl ins Terminal kopieren und Enter drücken:</p>
-    <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
-
-    <p><strong>Was jetzt passiert:</strong></p>
-    <ol>
-      <li>Das Skript fragt nach dem <strong>Mac-Passwort</strong>. Eingeben (es wird nichts angezeigt!) und Enter drücken.</li>
-      <li>Es erscheint eine Liste, was installiert wird. <strong>Enter drücken</strong> zum Bestätigen.</li>
-      <li>Die Installation läuft. Das kann <strong>2&ndash;10 Minuten</strong> dauern.</li>
-    </ol>
+    <h2>1. Claude Code installieren (empfohlener Weg)</h2>
+    <p>Diesen einen Befehl ins Terminal kopieren und Enter dr&uuml;cken:</p>
+    <pre><code>curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+    <p>Der Installer l&auml;dt eine fertige Programmdatei herunter und legt sie unter <code>~/.local/bin/claude</code> ab. Das dauert nur ein paar Sekunden. Homebrew, Node.js oder npm werden dabei <strong>nicht</strong> gebraucht.</p>
 
     <div class="info-box">
-      <p><strong>Falls eine Meldung erscheint, dass Xcode Command Line Tools installiert werden:</strong> Das ist normal! Einfach warten, bis es fertig ist. Kann bis zu 10 Minuten dauern.</p>
+      <p><strong>Wichtig:</strong> Nach der Installation einmal ein <strong>neues Terminal-Fenster</strong> &ouml;ffnen (oder das aktuelle schlie&szlig;en und neu &ouml;ffnen). Erst dann kennt das Terminal den Befehl <code>claude</code>.</p>
     </div>
 
-    <h3>1.1 Homebrew aktivieren</h3>
-    <p>Wenn die Installation fertig ist, erscheint wieder der blinkende Cursor. Jetzt diese zwei Befehle <strong>nacheinander</strong> eingeben (einzeln kopieren, Enter, nächsten kopieren, Enter):</p>
-    <pre><code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile</code></pre>
-    <p>Dieser Befehl gibt keine Ausgabe. Das ist normal. Weiter mit:</p>
-    <pre><code>eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
-    <p>Auch hier keine Ausgabe. Normal.</p>
-
-    <h3>1.2 Testen, ob Homebrew funktioniert</h3>
-    <pre><code>brew --version</code></pre>
-    <p>Wenn eine Versionsnummer erscheint (z.B. "Homebrew 6.0.1"), hat es funktioniert. Weiter mit Schritt 2.</p>
-
-    <h2>2. Node.js installieren</h2>
-    <p>Direkt im gleichen Terminal eingeben:</p>
-    <pre><code>brew install node</code></pre>
-    <p>Homebrew lädt und installiert Node.js. Dauert ca. 1&ndash;2 Minuten. Warten, bis der Cursor wieder blinkt.</p>
-
-    <h3>2.1 Testen</h3>
-    <pre><code>node --version</code></pre>
-    <p>Wenn eine Versionsnummer erscheint (z.B. "v25.9.0"), hat es funktioniert. Weiter mit Schritt 3.</p>
-
-    <h2>3. Claude Code installieren</h2>
-    <p>Direkt im gleichen Terminal eingeben:</p>
-    <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
-    <p>npm (der Node-Paketmanager) lädt Claude Code herunter. Dauert ca. 30 Sekunden.</p>
-
-    <h3>3.1 Testen</h3>
+    <h3>1.1 Testen, ob es funktioniert hat</h3>
     <pre><code>claude --version</code></pre>
-    <p>Erwartete Ausgabe: eine Versionsnummer wie "2.1.177 (Claude Code)". Weiter mit Schritt 4.</p>
+    <p>Erwartete Ausgabe: eine Versionsnummer wie <code>2.1.204 (Claude Code)</code>. Wenn das erscheint, ist die Installation fertig &mdash; weiter mit Schritt 2.</p>
 
-    <h2>4. Einstellungen konfigurieren</h2>
-    <p>Bevor Claude Code das erste Mal richtig gestartet wird, legen wir die Einstellungen an. So antwortet Claude direkt auf Deutsch und nutzt das beste Modell.</p>
+    <div class="info-box">
+      <p><strong>Falls <code>claude: command not found</code> erscheint:</strong> Das Terminal kennt den neuen Befehl noch nicht. Neues Terminal-Fenster &ouml;ffnen und nochmal probieren. Hilft das nicht, diesen Befehl ausf&uuml;hren: <code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zprofile</code> &mdash; dann Terminal neu starten.</p>
+    </div>
 
-    <p>Den folgenden Block <strong>KOMPLETT</strong> markieren und als Ganzes ins Terminal einfügen (nicht Zeile für Zeile!):</p>
+    <h3>1.2 Diagnose bei Problemen</h3>
+    <p>Claude Code bringt ein eingebautes Diagnose-Tool mit. Wenn irgendetwas hakt, gibt dieser Befehl eine klare &Uuml;bersicht (Installation, Version, Login, MCP-Server):</p>
+    <pre><code>claude doctor</code></pre>
+
+    <h2>2. Einstellungen konfigurieren</h2>
+    <p>Bevor du Claude Code das erste Mal startest, legen wir die Grundeinstellungen an &mdash; so antwortet Claude direkt auf Deutsch und nutzt das st&auml;rkste Modell.</p>
+
+    <p>Den folgenden Block <strong>KOMPLETT</strong> markieren (von <code>mkdir</code> bis <code>EOF</code>) und als Ganzes ins Terminal einf&uuml;gen &mdash; nicht Zeile f&uuml;r Zeile:</p>
     <pre><code>mkdir -p ~/.claude && cat > ~/.claude/settings.json << 'EOF'
 {
-  "enableAllProjectMcpServers": true,
+  "model": "sonnet",
   "language": "Deutsch",
-  "model": "claude-opus-4-6",
+  "enableAllProjectMcpServers": true,
+  "theme": "dark",
   "voiceEnabled": true
 }
 EOF</code></pre>
 
     <div class="info-box">
-      <p><strong>Wichtig:</strong> Den gesamten Block auf einmal kopieren und einfügen! Von "mkdir" bis "EOF" &mdash; alles markieren, kopieren, einfügen, Enter. Es erscheint keine Ausgabe. Die Datei wurde im Hintergrund erstellt.</p>
+      <p><strong>Hinweis:</strong> Es erscheint keine Ausgabe &mdash; die Datei wurde im Hintergrund erstellt. Falls du schon eine <code>settings.json</code> mit anderen Eintr&auml;gen hast, &uuml;berschreibt dieser Befehl sie. In dem Fall die Werte lieber von Hand erg&auml;nzen.</p>
     </div>
 
-    <h3>4.1 Prüfen, ob es geklappt hat</h3>
+    <h3>2.1 Pr&uuml;fen, ob es geklappt hat</h3>
     <pre><code>cat ~/.claude/settings.json</code></pre>
-    <p>Hier sollte der JSON-Inhalt erscheinen, den du gerade eingefügt hast.</p>
+    <p>Hier sollte der JSON-Inhalt erscheinen, den du gerade eingef&uuml;gt hast.</p>
 
     <p><strong>Was diese Einstellungen machen:</strong></p>
     <ul>
-      <li><strong>enableAllProjectMcpServers:</strong> Erlaubt Verbindungen zu externen Diensten</li>
-      <li><strong>language:</strong> Claude antwortet auf Deutsch</li>
-      <li><strong>model:</strong> Nutzt das stärkste Modell (Opus)</li>
-      <li><strong>voiceEnabled:</strong> Spracheingabe aktiviert</li>
+      <li><strong>model:</strong> <code>"sonnet"</code> ist der Standard und w&auml;hlt immer automatisch das aktuelle Sonnet-Modell (derzeit Sonnet 5) &mdash; die beste Balance aus Tempo und Qualit&auml;t f&uuml;r den Alltag. Weil es ein Alias ist, bleibt die Einstellung auch nach Updates korrekt; du musst nie eine Versionsnummer nachpflegen.</li>
+      <li><strong>language:</strong> Claude antwortet auf Deutsch.</li>
+      <li><strong>enableAllProjectMcpServers:</strong> Erlaubt Verbindungen zu allen im Projekt hinterlegten MCP-Servern.</li>
+      <li><strong>theme:</strong> Dunkles Terminal-Design.</li>
+      <li><strong>voiceEnabled:</strong> Spracheingabe aktiviert.</li>
     </ul>
 
-    <h2>5. Claude Code starten &amp; einloggen</h2>
+    <div class="info-box">
+      <p><strong>Profi-Tipp:</strong> F&uuml;r besonders knifflige Aufgaben kannst du jederzeit mitten in der Sitzung mit <code>/model</code> auf Opus (das st&auml;rkste Modell) wechseln. Wer dauerhaft mehr Ged&auml;chtnis pro Sitzung braucht, tr&auml;gt <code>"sonnet[1m]"</code> ein &mdash; das schaltet das gro&szlig;e 1-Million-Token-Kontextfenster frei.</p>
+    </div>
+
+    <h2>3. Claude Code starten &amp; einloggen</h2>
     <p>Jetzt Claude Code zum ersten Mal starten:</p>
     <pre><code>claude</code></pre>
 
     <p><strong>Was jetzt passiert:</strong></p>
     <ol>
-      <li>Claude Code fragt nach dem Login. Ein <strong>Browser-Fenster öffnet sich automatisch</strong>.</li>
+      <li>Claude Code fragt nach dem Login &mdash; ein <strong>Browser-Fenster &ouml;ffnet sich automatisch</strong>.</li>
       <li>Im Browser mit dem Anthropic-Account (claude.ai) einloggen.</li>
-      <li>Die Verbindung bestätigen ("Authorize" klicken).</li>
-      <li>Zurück zum Terminal wechseln. Claude Code ist jetzt bereit.</li>
+      <li>Die Verbindung best&auml;tigen (&bdquo;Authorize&ldquo; klicken).</li>
+      <li>Zur&uuml;ck zum Terminal wechseln &mdash; Claude Code ist jetzt bereit.</li>
     </ol>
 
     <div class="info-box">
       <p><strong>Achtung:</strong> Der Anthropic-Account muss ein aktives Abo haben (Max, Pro oder Team). Ohne Abo erscheint eine Fehlermeldung.</p>
     </div>
 
-    <p>Claude Code ist jetzt aktiv. Du siehst eine Eingabezeile und kannst direkt lostippen. Zum Beenden: <code>Ctrl+C</code> drücken oder <code>/exit</code> eingeben.</p>
+    <p>Claude Code ist jetzt aktiv. Du siehst eine Eingabezeile und kannst direkt lostippen. Zum Beenden: <code>/exit</code> eingeben oder zweimal <code>Ctrl+C</code> dr&uuml;cken.</p>
 
-    <h2>6. MCP-Dienste verbinden</h2>
-    <p>MCP-Dienste erweitern Claude um externe Fähigkeiten wie Bildgenerierung. Ein Befehl im Terminal reicht &mdash; die Anmeldung passiert automatisch.</p>
+    <h2>4. MCP-Dienste verbinden</h2>
+    <p>MCP-Server erweitern Claude um externe F&auml;higkeiten &mdash; z.&nbsp;B. Bildgenerierung &uuml;ber Higgsfield. Ein Befehl im Terminal reicht, die Anmeldung passiert danach automatisch im Browser.</p>
 
     <div class="info-box">
-      <p><strong>Wichtig:</strong> Falls Claude Code noch läuft, zuerst mit <code>Ctrl+C</code> oder <code>/exit</code> beenden. Die folgenden Befehle werden in der normalen Terminal-Shell eingegeben, nicht in Claude Code.</p>
+      <p><strong>Wichtig:</strong> Diese Befehle in der normalen Terminal-Shell eingeben, nicht innerhalb von Claude Code. Falls Claude Code noch l&auml;uft, vorher mit <code>/exit</code> beenden.</p>
     </div>
 
-    <h3>6.1 Higgsfield verbinden (Bildgenerierung)</h3>
+    <h3>4.1 Higgsfield verbinden (Bildgenerierung)</h3>
     <pre><code>claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp</code></pre>
-    <p>Beim nächsten Start von Claude Code und der ersten Bild-Anfrage öffnet sich automatisch ein Browser-Fenster zur Higgsfield-Anmeldung. Einmal bestätigen &mdash; danach funktioniert es dauerhaft.</p>
+    <p>Beim n&auml;chsten Start von Claude Code und der ersten Bild-Anfrage &ouml;ffnet sich automatisch ein Browser-Fenster zur Higgsfield-Anmeldung. Einmal best&auml;tigen &mdash; danach funktioniert es dauerhaft.</p>
 
-    <h3>6.2 Prüfen</h3>
+    <h3>4.2 Pr&uuml;fen</h3>
     <pre><code>claude mcp list</code></pre>
     <p>In der Liste sollte <code>higgsfield</code> mit der URL <code>https://mcp.higgsfield.ai/mcp</code> erscheinen.</p>
 
-    <h3>6.3 Weitere Dienste (optional)</h3>
-    <p>Andere MCP-Dienste werden genauso verbunden &mdash; immer das gleiche Muster:</p>
+    <h3>4.3 Weitere Dienste (optional)</h3>
+    <p>Andere MCP-Server werden nach dem gleichen Muster verbunden:</p>
     <pre><code>claude mcp add --transport http --scope user [name] [url]</code></pre>
-    <p>Beispiele:</p>
-    <pre><code>claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp
-claude mcp add --transport http --scope user slack https://mcp.slack.com/mcp</code></pre>
-    <p>Beim ersten Nutzen öffnet sich jeweils automatisch die Anmeldung im Browser.</p>
+    <p>Beim ersten Nutzen &ouml;ffnet sich jeweils automatisch die Anmeldung im Browser. Eine &Uuml;bersicht aller empfohlenen Server findest du im Artikel <a href="mcp-integrationen.html">MCP-Integrationen</a>.</p>
 
-    <h2>7. Erster Test</h2>
-    <p>Falls Claude Code noch läuft, kannst du direkt lostippen. Falls nicht, starte es erneut:</p>
+    <h2>5. Erster Test</h2>
+    <p>Claude Code starten (falls es nicht mehr l&auml;uft):</p>
     <pre><code>claude</code></pre>
 
-    <h3>7.1 Deutsch testen</h3>
+    <h3>5.1 Deutsch testen</h3>
     <p>Tippe in Claude Code:</p>
-    <pre><code>Hallo! Antworte mir bitte auf Deutsch.</code></pre>
+    <pre><code>Hallo! Fasse mir in zwei S&auml;tzen zusammen, was du alles kannst.</code></pre>
     <p>Claude sollte auf Deutsch antworten.</p>
 
-    <h3>7.2 Bildgenerierung testen (wenn Higgsfield verbunden)</h3>
+    <h3>5.2 Bildgenerierung testen (wenn Higgsfield verbunden)</h3>
     <p>Tippe in Claude Code:</p>
     <pre><code>Generiere mir ein Bild von einem Sonnenuntergang am Meer.</code></pre>
-    <p>Claude nutzt Higgsfield und erstellt ein Bild. Beim ersten Mal öffnet sich ein Browser-Fenster zur Higgsfield-Anmeldung &mdash; Zugriff bestätigen, dann wird das Bild generiert.</p>
+    <p>Claude nutzt Higgsfield und erstellt ein Bild. Beim ersten Mal &ouml;ffnet sich ein Browser-Fenster zur Higgsfield-Anmeldung &mdash; Zugriff best&auml;tigen, dann wird das Bild generiert.</p>
 
-    <h3>7.3 Nützliche Befehle</h3>
+    <h3>5.3 N&uuml;tzliche Befehle</h3>
     <table class="content-table">
       <thead>
         <tr>
@@ -218,51 +193,85 @@ claude mcp add --transport http --scope user slack https://mcp.slack.com/mcp</co
       </thead>
       <tbody>
         <tr>
-          <td><code>Ctrl+C</code></td>
-          <td>Claude Code beenden</td>
+          <td><code>claude</code></td>
+          <td>Claude Code im Terminal starten</td>
         </tr>
         <tr>
           <td><code>/exit</code></td>
-          <td>Claude Code beenden (Alternative)</td>
+          <td>Claude Code beenden (oder zweimal <code>Ctrl+C</code>)</td>
         </tr>
         <tr>
           <td><code>/help</code></td>
-          <td>Übersicht aller verfügbaren Befehle</td>
+          <td>&Uuml;bersicht aller verf&uuml;gbaren Befehle</td>
         </tr>
         <tr>
           <td><code>/clear</code></td>
-          <td>Konversation löschen und neu starten</td>
+          <td>Konversation l&ouml;schen und frisch starten</td>
         </tr>
         <tr>
-          <td><code>claude</code></td>
-          <td>Im Terminal eingeben, um Claude Code erneut zu starten</td>
+          <td><code>/model</code></td>
+          <td>Modell mitten in der Sitzung wechseln</td>
+        </tr>
+        <tr>
+          <td><code>claude doctor</code></td>
+          <td>Diagnose bei Problemen (im Terminal, nicht in Claude)</td>
+        </tr>
+        <tr>
+          <td><code>claude update</code></td>
+          <td>Manuell auf die neueste Version aktualisieren</td>
         </tr>
       </tbody>
     </table>
 
+    <h2>Alternative: Installation &uuml;ber Homebrew + Node.js</h2>
+    <p>Du brauchst diesen Weg <strong>nur</strong>, wenn du bewusst &uuml;ber npm/Node arbeiten willst. F&uuml;r die normale Einrichtung ist der native Installer aus Schritt&nbsp;1 einfacher und stabiler. Falls du diesen Weg trotzdem gehst:</p>
+
+    <h3>A. Homebrew installieren</h3>
+    <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+    <p>Das Skript fragt nach dem <strong>Mac-Passwort</strong> (Eingabe wird nicht angezeigt &mdash; das ist normal), dann Enter zum Best&auml;tigen. Kann einige Minuten dauern. Danach Homebrew aktivieren:</p>
+    <pre><code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
+
+    <h3>B. Node.js installieren</h3>
+    <pre><code>brew install node</code></pre>
+    <p>Claude Code &uuml;ber npm ben&ouml;tigt Node.js 22 oder neuer. Mit <code>node --version</code> pr&uuml;fen.</p>
+
+    <h3>C. Claude Code &uuml;ber npm installieren</h3>
+    <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+
+    <div class="info-box">
+      <p><strong>H&auml;ufige Stolperfalle (npm):</strong> Neuere npm-Versionen blockieren aus Sicherheitsgr&uuml;nden den <code>postinstall</code>-Schritt von Claude Code. Du erkennst das an einer Meldung wie &bdquo;<code>npm warn allow-scripts &hellip; postinstall: node install.cjs</code>&ldquo;. Dann ist die Installation nur <strong>halb</strong> fertig und <code>claude</code> funktioniert nicht richtig. Fix &mdash; den Script freigeben und neu installieren:</p>
+      <pre><code>npm approve-scripts @anthropic-ai/claude-code
+npm install -g @anthropic-ai/claude-code</code></pre>
+      <p>Wenn dich das nervt: einfach den nativen Installer aus Schritt&nbsp;1 nutzen &mdash; der hat dieses Problem nicht.</p>
+    </div>
+
+    <div class="info-box">
+      <p><strong>Kein <code>sudo</code>:</strong> Installiere niemals mit <code>sudo npm install -g</code> &mdash; das f&uuml;hrt zu Rechte-Problemen. Und: &uuml;ber Homebrew/npm installiertes Claude Code aktualisiert sich <em>nicht</em> selbst; nutze <code>brew upgrade</code> bzw. <code>npm update -g @anthropic-ai/claude-code</code>.</p>
+    </div>
+
     <h2>Checkliste</h2>
-    <p>Alles eingerichtet? Prüfe diese Punkte:</p>
+    <p>Alles eingerichtet? Pr&uuml;fe diese Punkte:</p>
     <ul>
-      <li><strong>Homebrew:</strong> <code>brew --version</code> zeigt eine Versionsnummer</li>
-      <li><strong>Node.js:</strong> <code>node --version</code> zeigt eine Versionsnummer</li>
       <li><strong>Claude Code:</strong> <code>claude --version</code> zeigt eine Versionsnummer</li>
       <li><strong>Einstellungen:</strong> <code>cat ~/.claude/settings.json</code> zeigt die JSON-Konfiguration</li>
       <li><strong>Login:</strong> <code>claude</code> startet ohne Fehlermeldung</li>
       <li><strong>Deutsch:</strong> Claude antwortet auf Deutsch</li>
       <li><strong>Higgsfield (optional):</strong> <code>claude mcp list</code> zeigt den Eintrag</li>
+      <li><strong>Diagnose:</strong> <code>claude doctor</code> meldet keine Fehler</li>
     </ul>
 
-    <h2>Was kommt als Nächstes?</h2>
-    <p>Claude Code läuft und ist einsatzbereit. Als Nächstes solltest du die MCP-Integrationen kennenlernen, die deine Möglichkeiten massiv erweitern &mdash; oder direkt deinen ersten Skill ausprobieren.</p>
+    <h2>Was kommt als N&auml;chstes?</h2>
+    <p>Claude Code l&auml;uft und ist einsatzbereit. Als N&auml;chstes lohnen sich die MCP-Integrationen (sie erweitern deine M&ouml;glichkeiten massiv) und die fertigen Skills.</p>
 
     <h3>Die CLAUDE.md Datei</h3>
-    <p>Wenn du in ein Projektverzeichnis navigierst und dort <code>claude</code> startest, sucht Claude Code automatisch nach einer <code>CLAUDE.md</code> Datei. Diese definiert die Rolle, Regeln und verfügbaren Tools für das Projekt. Du musst sie nicht manuell bearbeiten &mdash; Claude Code liest sie automatisch beim Start.</p>
+    <p>Wenn du in ein Projektverzeichnis navigierst und dort <code>claude</code> startest, sucht Claude Code automatisch nach einer <code>CLAUDE.md</code>. Diese Datei definiert Rolle, Regeln und verf&uuml;gbare Tools f&uuml;r das Projekt. Du musst sie nicht manuell &ouml;ffnen &mdash; Claude Code liest sie beim Start automatisch.</p>
 
     <h3>Memory-System</h3>
-    <p>Claude Code hat ein persistentes Gedächtnis. Wenn du sagst "Merk dir das", speichert er die Information ab. Beim nächsten Start hat er automatisch Zugriff auf alles Gespeicherte. Das Memory unterscheidet zwischen:</p>
+    <p>Claude Code hat ein persistentes Ged&auml;chtnis. Sagst du &bdquo;Merk dir das&ldquo;, speichert er die Information ab und hat beim n&auml;chsten Start automatisch Zugriff darauf. Das Memory unterscheidet:</p>
     <ul>
-      <li><strong>User-Memories:</strong> Infos über dich (Rolle, Vorlieben)</li>
-      <li><strong>Feedback-Memories:</strong> Korrekturen und bestätigte Vorgehensweisen</li>
+      <li><strong>User-Memories:</strong> Infos &uuml;ber dich (Rolle, Vorlieben)</li>
+      <li><strong>Feedback-Memories:</strong> Korrekturen und best&auml;tigte Vorgehensweisen</li>
       <li><strong>Project-Memories:</strong> Laufende Projekte und Kunden-Infos</li>
       <li><strong>Reference-Memories:</strong> Verweise auf externe Systeme</li>
     </ul>
@@ -275,14 +284,14 @@ claude mcp add --transport http --scope user slack https://mcp.slack.com/mcp</co
       <div class="articles-grid">
         <a href="mcp-integrationen.html" class="article-card">
           <span class="article-card-tag">Integrationen</span>
-          <h3>MCP-Server: Was sie können und wie du sie verbindest</h3>
-          <p>Überblick über alle verfügbaren MCP-Integrationen und was sie dir im Workflow bringen.</p>
+          <h3>MCP-Server: Was sie k&ouml;nnen und wie du sie verbindest</h3>
+          <p>&Uuml;berblick &uuml;ber alle verf&uuml;gbaren MCP-Integrationen und was sie dir im Workflow bringen.</p>
           <div class="article-card-meta"><span>&#128214; 6 Min.</span></div>
         </a>
         <a href="skills-uebersicht.html" class="article-card">
           <span class="article-card-tag">Workflows</span>
-          <h3>Alle 21 Skills im Überblick</h3>
-          <p>Von /ad-session bis /website &mdash; jeder Skill erklärt.</p>
+          <h3>Alle Skills im &Uuml;berblick</h3>
+          <p>Von /ad-session bis /website &mdash; jeder Skill erkl&auml;rt.</p>
           <div class="article-card-meta"><span>&#128214; 15 Min.</span></div>
         </a>
       </div>
@@ -293,7 +302,7 @@ claude mcp add --transport http --scope user slack https://mcp.slack.com/mcp</co
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="nav-logo"><img src="../assets/logo.png" alt="Heartbeat"></div>
-        <p>Deine zentrale Anlaufstelle für Claude Code Wissen.</p>
+        <p>Deine zentrale Anlaufstelle f&uuml;r Claude Code Wissen.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
